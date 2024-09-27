@@ -1,4 +1,4 @@
-package com.assigment.caulong.util;
+package com.assignment.caulong.util;
 
 public class LoginUser {
 	public Boolean CheckLogin(String userName,String password)

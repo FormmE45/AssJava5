@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,16 +59,16 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav ms-auto w-100 justify-content-end align-items-center">
-                    <li class="nav-item pe-2">
+                    <li class="nav-item pe-4">
                         <a class="nav-link position-relative" href="#">
                             <i class="fa-solid fa-cart-shopping fa-xl"></i>
                             <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">99
-                                <span class="visually-hidden">unread messages</span>
+                                <span class="visually-hidden">số lượng</span>
                             </span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/SignUp">Đăng ký</a>
+                        <a class="nav-link" href="/signup">Đăng ký</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">
@@ -132,7 +132,7 @@
                                         <img src="https://thethaothienlong.vn/wp-content/uploads/2022/04/Danh-sach-san-cau-long-o-tphcm-1.jpg"
                                             alt="" class="rounded-4"
                                             style="width: 130px; height: 80px; object-fit: cover;">
-                                        </div>
+                                    </div>
                                     <div class="w-100 h-100 ps-2">
                                         <span>Sân cầu lông</span>
                                     </div>
@@ -144,7 +144,7 @@
                                         <img src="https://tigerturf.com/in/wp-content/uploads/2019/11/How-to-build-a-tennis-court-1440x1080.jpg"
                                             alt="" class="rounded-4"
                                             style="width: 130px; height: 80px; object-fit: cover;">
-                                        </div>
+                                    </div>
                                     <div class="w-100 h-100 ps-2">
                                         <span>Sân cầu lông</span>
                                     </div>
@@ -156,7 +156,7 @@
                                         <img src="https://s42493.pcdn.co/wp-content/uploads/2023/07/courts-scaled.jpg"
                                             alt="" class="rounded-4"
                                             style="width: 130px; height: 80px; object-fit: cover;">
-                                        </div>
+                                    </div>
                                     <div class="w-100 h-100 ps-2">
                                         <span>Sân cầu lông</span>
                                     </div>
@@ -175,7 +175,7 @@
                                         <img src="https://thethaothienlong.vn/wp-content/uploads/2022/04/Danh-sach-san-cau-long-o-tphcm-1.jpg"
                                             alt="" class="rounded-4"
                                             style="width: 130px; height: 80px; object-fit: cover;">
-                                        </div>
+                                    </div>
                                     <div class="w-100 h-100 ps-2">
                                         <span>Sân cầu lông</span>
                                     </div>
@@ -187,7 +187,7 @@
                                         <img src="https://tigerturf.com/in/wp-content/uploads/2019/11/How-to-build-a-tennis-court-1440x1080.jpg"
                                             alt="" class="rounded-4"
                                             style="width: 130px; height: 80px; object-fit: cover;">
-                                        </div>
+                                    </div>
                                     <div class="w-100 h-100 ps-2">
                                         <span>Sân cầu lông</span>
                                     </div>
@@ -199,7 +199,7 @@
                                         <img src="https://s42493.pcdn.co/wp-content/uploads/2023/07/courts-scaled.jpg"
                                             alt="" class="rounded-4"
                                             style="width: 130px; height: 80px; object-fit: cover;">
-                                        </div>
+                                    </div>
                                     <div class="w-100 h-100 ps-2">
                                         <span>Sân cầu lông</span>
                                     </div>
@@ -218,7 +218,7 @@
                                         <img src="https://thethaothienlong.vn/wp-content/uploads/2022/04/Danh-sach-san-cau-long-o-tphcm-1.jpg"
                                             alt="" class="rounded-4"
                                             style="width: 130px; height: 80px; object-fit: cover;">
-                                        </div>
+                                    </div>
                                     <div class="w-100 h-100 ps-2">
                                         <span>Sân cầu lông</span>
                                     </div>
@@ -230,7 +230,7 @@
                                         <img src="https://tigerturf.com/in/wp-content/uploads/2019/11/How-to-build-a-tennis-court-1440x1080.jpg"
                                             alt="" class="rounded-4"
                                             style="width: 130px; height: 80px; object-fit: cover;">
-                                        </div>
+                                    </div>
                                     <div class="w-100 h-100 ps-2">
                                         <span>Sân cầu lông</span>
                                     </div>
@@ -242,7 +242,7 @@
                                         <img src="https://s42493.pcdn.co/wp-content/uploads/2023/07/courts-scaled.jpg"
                                             alt="" class="rounded-4"
                                             style="width: 130px; height: 80px; object-fit: cover;">
-                                        </div>
+                                    </div>
                                     <div class="w-100 h-100 ps-2">
                                         <span>Sân cầu lông</span>
                                     </div>

@@ -33,7 +33,7 @@ public class LoginController {
 		return "DangNhap";
 	}
 	
-	@RequestMapping("/SignUp")
+	@RequestMapping("/signup")
 	public String getSignUp(Model model)
 	{
 		Customer cus=new Customer();

@@ -4,11 +4,13 @@ import java.sql.Time;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "")
 public class CourtOrder {
+	@Id
 	private int customerId;
 	private int courtId;
 	private Date date;
