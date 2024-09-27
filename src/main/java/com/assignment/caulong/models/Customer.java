@@ -1,10 +1,14 @@
 package com.assignment.caulong.models;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,6 +18,7 @@ public class Customer {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="MaKhachHang")
 	private int id;
+	
 	@Column(name="HoTen",length=100)
 	private String name;
 	@Column(name="Email",length=100,unique=true)
@@ -26,6 +31,9 @@ public class Customer {
 	private String username;
 	@Column(name="Password")
 	private String password;
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	private List<CourtOrder> orders;
+	
 	
 	
 	public Customer() {
@@ -84,5 +92,12 @@ public class Customer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+	public List<CourtOrder> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<CourtOrder> orders) {
+		this.orders = orders;
+	}
+
 }
