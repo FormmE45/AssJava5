@@ -23,6 +23,31 @@ public class CustomerController {
 		super();
 		this.cusRepository = cusRepository;
 	}
+	
+	@GetMapping("/giohang")
+	public String gioHang() {
+		return "giohang";
+	}
+	
+	@GetMapping("/nhanvien/quanlysan")
+	public String quanlysan() {
+		return "/nhanvien/quanlysan";
+	}
+	
+	@GetMapping("/nhanvien/quanlydatsan")
+	public String quanlydatsan() {
+		return "/nhanvien/quanlydatsan";
+	}
+	
+	@GetMapping("/nhanvien/quanlynhanvien")
+	public String quanlynhanvien() {
+		return "/nhanvien/quanlynhanvien";
+	}
+	
+	@GetMapping("/thongtin")
+	public String thongtin() {
+		return "/thongtincanhan";
+	}
 
 	@GetMapping("/customer/{id}")
 	public String getCustomerById(@PathVariable int id, Model model) {

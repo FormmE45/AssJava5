@@ -24,10 +24,10 @@
             <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
                 <ul class="navbar-nav w-100 justify-content-evenly">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Trang chủ</a>
+                        <a class="nav-link" href="/">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sân</a>
+                        <a class="nav-link" href="san">Sân</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Shop</a>
@@ -36,23 +36,23 @@
                         <a class="nav-link" href="#">Tin tức</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Dành cho chủ sân</a>
+                        <a class="nav-link" href="nhanvien/quanlydatsan">Dành cho chủ sân</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav ms-auto w-100 justify-content-end align-items-center">
-                    <li class="nav-item pe-2">
+                    <li class="nav-item pe-4">
                         <a class="nav-link position-relative" href="#">
                             <i class="fa-solid fa-cart-shopping fa-xl"></i>
                             <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">99
-                                <span class="visually-hidden">unread messages</span>
+                                <span class="visually-hidden">số lượng</span>
                             </span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Đăng ký</a>
+                        <a class="nav-link" href="signup">Đăng ký</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="login">
                             <span class="btn btn-danger rounded-4 flex-grow-1">Đăng nhập</span>
                         </a>
                     </li>
