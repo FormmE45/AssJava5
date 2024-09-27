@@ -19,4 +19,7 @@ public class CustomerService {
 	public Customer getByUsername(String username) {
 		return cusRepo.findByUsername(username);
 	}
+	public Customer save(Customer customer) {
+		return cusRepo.save(customer);
+	}
 }

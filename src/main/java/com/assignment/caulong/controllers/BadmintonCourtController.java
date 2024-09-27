@@ -27,4 +27,5 @@ public class BadmintonCourtController {
 	public List<BadmintonCourt> getAllCourt() {
 		return courtRepo.findAll();
 	}
+
 }

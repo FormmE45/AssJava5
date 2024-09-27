@@ -17,12 +17,15 @@
 <body>
     <div class="container w-50 py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100 shadow p-3 bg-body-tertiary rounded">
+            <div class="col-12">
+                <a href="/" class="text-decoration-none pt-1">Về lại trang chủ</a>
+            </div>
             <div class="col-5">
                 <img src="https://png.pngtree.com/png-clipart/20230817/original/pngtree-vector-illustration-of-badminton-rackets-and-shuttlecocks-in-a-fun-doodle-style-with-the-playful-lettering-play-with-me-vector-picture-image_11009468.png" alt="" class="img-fluid">
             </div>
-            <div class="col-7 container py-5">
+            <div class="col-7 container py-auto">
                 <h4 class="text-center mb-4">Đăng ký</h4>
-                <form:form action="/GetSignUp" method="post" modelAttribute="customer">
+                <form:form action="/signup" method="post" modelAttribute="customer">
                     <div class="row mb-4">
                         <label for="hoTen" class="col-3 col-form-label fw-bold">Họ tên</label>
                         <div class="col-9">

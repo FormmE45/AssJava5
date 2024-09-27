@@ -11,18 +11,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.assignment.caulong.models.BadmintonCourt;
 import com.assignment.caulong.models.Customer;
 import com.assignment.caulong.models.User;
+import com.assignment.caulong.service.CustomerService;
 import com.assignment.caulong.service.LoginService;
 
 
 @Controller
 public class LoginController {
 	private LoginService loginService;
-	
+	private CustomerService cusService;
 	
 	@Autowired
-	public LoginController(LoginService loginService) {
+	public LoginController(LoginService loginService,CustomerService cusService) {
 		super();
 		this.loginService = loginService;
+		this.cusService= cusService;
 	}
 
 	@GetMapping("/")
@@ -40,11 +42,10 @@ public class LoginController {
 		return "DangNhap";
 	}
 	
-	@GetMapping("/SignUp")
+	@GetMapping("/signup")
 	public String getSignUp(Model model)
 	{
 		Customer cus=new Customer();
-		
 		model.addAttribute("customer", cus);
 		return "DangKy";
 	}
@@ -54,8 +55,6 @@ public class LoginController {
 	{
 		BadmintonCourt sanCau=new BadmintonCourt();
 		//Câu lệnh lấy sân có id tương ứng
-		
-		
 		model.addAttribute("san",sanCau);
 		return "ChiTietSan";
 	}
@@ -77,19 +76,19 @@ public class LoginController {
 		
 	}
 	
-	@PostMapping("/GetSignUp")
-	public String GetSignUp(@ModelAttribute("customer") Customer cus,Model model)
+	@PostMapping("/signup")
+	public String GetSignUp(@ModelAttribute Customer customer,Model model)
 	{
 		
-
-		if(true)
+		if(customer!=null)
 		{
+			cusService.save(customer);
 			return "redirect:/";
 		}
 		else
 		{
 			model.addAttribute("Message", "Sign up failed, there is an error during registration ");
-			return "redirect:/SignUp";
+			return "redirect:/signup";
 		}
 	}
 	
