@@ -25,7 +25,7 @@
             </div>
             <div class="col-7 container py-auto">
                 <h4 class="text-center mb-4">Đăng ký</h4>
-                <form:form action="/GetSignUp" method="post" modelAttribute="customer">
+                <form:form action="/signup" method="post" modelAttribute="customer">
                     <div class="row mb-4">
                         <label for="hoTen" class="col-3 col-form-label fw-bold">Họ tên</label>
                         <div class="col-9">
