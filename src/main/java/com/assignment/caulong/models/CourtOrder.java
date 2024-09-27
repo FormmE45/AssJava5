@@ -3,36 +3,61 @@ package com.assignment.caulong.models;
 import java.sql.Time;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "")
+@Table(name = "DatSanCau")
 public class CourtOrder {
-	private int customerId;
-	private int courtId;
-	private Date date;
-	private Time start;
-	private Time end;
-	private String status;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="MaDatSan")
 	private int courtOrderId;
-
+	
+	@ManyToOne
+	@JoinColumn(name="MaKhachHang")
+	@JsonIgnore
+	private Customer customer;
+	
+	@ManyToOne
+	@JoinColumn(name="MaSan")
+	private BadmintonCourt badmintoncourt;
+	@Column(name="NgayDat")
+	private Date date;
+	@Column(name="GioBatDau")
+	private Time start;
+	@Column(name="GioKetThuc")
+	private Time end;
+	@Column(name="TrangThaiDat")
+	private String status;
 	
 	public CourtOrder() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public CourtOrder(int customerId, int courtId, Date date, Time start, Time end, String status, int courtOrderId) {
+	
+	public CourtOrder(int courtOrderId, Customer customer, BadmintonCourt badmintoncourt, Date date, Time start,
+			Time end, String status) {
 		super();
-		this.customerId = customerId;
-		this.courtId = courtId;
+		this.courtOrderId = courtOrderId;
+		this.customer = customer;
+		this.badmintoncourt = badmintoncourt;
 		this.date = date;
 		this.start = start;
 		this.end = end;
 		this.status = status;
-		this.courtOrderId = courtOrderId;
 	}
+
 
 	public int getCourtOrderId() {
 		return courtOrderId;
@@ -42,20 +67,20 @@ public class CourtOrder {
 		this.courtOrderId = courtOrderId;
 	}
 
-	public int getCustomerId() {
-		return customerId;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
-	public int getCourtId() {
-		return courtId;
+	public BadmintonCourt getBadmintoncourt() {
+		return badmintoncourt;
 	}
 
-	public void setCourtId(int courtId) {
-		this.courtId = courtId;
+	public void setBadmintoncourt(BadmintonCourt badmintoncourt) {
+		this.badmintoncourt = badmintoncourt;
 	}
 
 	public Date getDate() {
@@ -89,5 +114,7 @@ public class CourtOrder {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	
 
 }
