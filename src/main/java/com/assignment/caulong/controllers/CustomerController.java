@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.assignment.caulong.models.Customer;
 import com.assignment.caulong.repository.CustomerRepository;
@@ -50,7 +49,7 @@ public class CustomerController {
 		return "customerCreateSuccess";
 	}
 	
-	@RequestMapping("/customer/Login")
+	@GetMapping("/customer/Login")
 	public String Login(Model model)
 	{
 		Customer cus=new Customer();
