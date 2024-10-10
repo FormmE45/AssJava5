@@ -31,7 +31,7 @@ public class CourtOrder {
 	
 	@ManyToOne
 	@JoinColumn(name="MaSan")
-	private BadmintonCourt badmintoncourt;
+	private BadmintonCourt badmintonCourt;
 	@Column(name="NgayDat")
 	private Date date;
 	@Column(name="GioBatDau")
@@ -51,7 +51,7 @@ public class CourtOrder {
 		super();
 		this.courtOrderId = courtOrderId;
 		this.customer = customer;
-		this.badmintoncourt = badmintoncourt;
+		this.badmintonCourt = badmintoncourt;
 		this.date = date;
 		this.start = start;
 		this.end = end;
@@ -76,11 +76,11 @@ public class CourtOrder {
 	}
 
 	public BadmintonCourt getBadmintoncourt() {
-		return badmintoncourt;
+		return badmintonCourt;
 	}
 
 	public void setBadmintoncourt(BadmintonCourt badmintoncourt) {
-		this.badmintoncourt = badmintoncourt;
+		this.badmintonCourt = badmintoncourt;
 	}
 
 	public Date getDate() {

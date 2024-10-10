@@ -45,7 +45,7 @@
                         <a class="nav-link" href="/">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="san">Sân</a>
+                        <a class="nav-link" href="/San">Sân</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Shop</a>
@@ -128,28 +128,67 @@
             <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 			<div class="row flex-nowrap overflow-auto mt-2">
-			    <form:form method="post">
-			        <div class="col-12">
-			            <div class="card shadow">
-			                <div class="card-header">Danh sách sân cầu lông</div>
-			                <ul class="list-group list-group-flush py-1">
-			                    <c:forEach var="sancau" items="${cacsancau}">
-			                        <li class="list-group-item border-0">
-			                            <div class="d-flex align-items-center text-black text-decoration-none">
-			                                <div class="">
-			                                    <img src="${sancau.hinhAnh}" alt="" class="rounded-4"
-			                                        style="width: 130px; height: 80px; object-fit: cover;">
-			                                </div>
-			                                <div class="w-100 h-100 ps-2">
-			                                    <span>${sancau.tenSancau}</span>
-			                                </div>
-			                            </div>
-			                        </li>
-			                    </c:forEach>
-			                </ul>
-			            </div>
-			        </div>
-			    </form:form>
+			   <form:form method="post">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-header">Danh sách sân cầu lông</div>
+            <div id="sancauCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <c:forEach var="sancau" items="${cacsancau}">
+                        <c:choose>
+                            <c:when test="${sancau.index == 0}"> <!-- Mục đầu tiên là active -->
+                                <div class="carousel-item active">
+                                    <div class="d-flex align-items-center text-black text-decoration-none">
+                                        <div class="carousel-img">
+                                            <c:forEach var="hinh" items="${sancau.badmintonCourtPics}">
+                                                <img src="${hinh.linkAnh}" alt="" class="rounded-4"
+                                                    style="width: 130px; height: 80px; object-fit: cover;">
+                                            </c:forEach>
+                                        </div>
+                                        <div class="w-100 h-100 ps-2">
+                                            <span>${sancau.Name}</span><br>
+                                            <strong>Giá: ${sancau.Price} VND</strong><br>
+                                            <a href="datNgay/${sancau.id}" class="btn btn-primary">Đặt ngay</a>
+                                            <a href="chiTiet/${sancau.id}" class="btn btn-secondary">Xem chi tiết</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="carousel-item">
+                                    <div class="d-flex align-items-center text-black text-decoration-none">
+                                        <div class="carousel-img">
+                                            <c:forEach var="hinh" items="${sancau.badmintonCourtPics}">
+                                                <img src="${hinh.linkAnh}" alt="" class="rounded-4"
+                                                    style="width: 130px; height: 80px; object-fit: cover;">
+                                            </c:forEach>
+                                        </div>
+                                        <div class="w-100 h-100 ps-2">
+                                            <span>${sancau.name}</span><br>
+                                            <strong>Giá: ${sancau.price} VND</strong><br>
+                                            <a href="datNgay/${sancau.id}" class="btn btn-primary">Đặt ngay</a>
+                                            <a href="chiTiet/${sancau.id}" class="btn btn-secondary">Xem chi tiết</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#sancauCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#sancauCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</form:form>
+
+
 			</div>
 
         </div>

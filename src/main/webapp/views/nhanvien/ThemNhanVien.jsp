@@ -15,19 +15,33 @@
         <h2>Thêm thông tin nhân viên</h2>
 
         <form:form modelAttribute="employee" action="/employee/add" method="post">
+        <div class="mb-3">
+                <label for="id" class="form-label">Mã Nhân Viên</label>
+                <form:input path="id" class="form-control" id="id" />
+            </div>
+            
             <div class="mb-3">
                 <label for="name" class="form-label">Tên nhân viên</label>
                 <form:input path="name" class="form-control" id="name" />
             </div>
-
+            
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <form:input path="email" class="form-control" id="email" />
+                <label for="username" class="form-label">Tên Đăng Nhập</label>
+                <form:input path="username" class="form-control" id="username" />
             </div>
+            
+			            <div class="mb-3">
+			    <label for="role" class="form-label">Vai Trò</label>
+			    <form:select path="role" class="form-control" id="role">
+			        <option value="nhanVien">Nhân viên</option>
+			        <option value="quanLy">Quản lý</option>
+			    </form:select>
+			</div>
 
+            
             <div class="mb-3">
-                <label for="phone" class="form-label">Số điện thoại</label>
-                <form:input path="phone" class="form-control" id="phone" />
+                <label for="password" class="form-label">Mật Khẩu</label>
+                <form:input path="password" class="form-control" id="password" />
             </div>
 
             <button type="submit" class="btn btn-primary">Thêm nhân viên</button>

@@ -1,5 +1,7 @@
 package com.assignment.caulong.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.assignment.caulong.models.BadmintonCourt;
 import com.assignment.caulong.models.Customer;
 import com.assignment.caulong.models.User;
+import com.assignment.caulong.repository.BadmintonCourtRepository;
 import com.assignment.caulong.service.CustomerService;
 import com.assignment.caulong.service.EmployeeService;
 import com.assignment.caulong.service.LoginService;
@@ -23,6 +26,9 @@ public class LoginController {
 	private EmployeeService empService;
 	
 	@Autowired
+	BadmintonCourtRepository badmintonRepo;
+	
+	@Autowired
 	public LoginController(LoginService loginService,CustomerService cusService,EmployeeService empService) {
 		super();
 		this.loginService = loginService;
@@ -33,7 +39,9 @@ public class LoginController {
 	@GetMapping("/")
 	public String getWebSite(Model model)
 	{
-		
+		List<BadmintonCourt> cacSan=badmintonRepo.findAll();
+		System.out.println("Số lượng: "+cacSan.size());
+		model.addAttribute("cacsancau", cacSan);
 		return "index";
 	}
 	

@@ -26,6 +26,6 @@ public class BadmintonCourtPic {
 	private String linkAnh;
 	
 	@ManyToOne
-	@JoinColumn(name="MaSan")
+	@JoinColumn(name="MaSan", referencedColumnName = "MaSan")
 	private BadmintonCourt badmintonCourt;
 }
