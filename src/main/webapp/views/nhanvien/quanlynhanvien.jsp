@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
@@ -11,63 +12,33 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Quản lý nhân viên</title>
-<style type="text/css">
-/* Center icon in button */
-.btn-icon {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 40px;
-	height: 40px;
-}
+    <style type="text/css">
+        /* Center icon in button */
+        .btn-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+        }
 
-/* Center icon in circle button */
-.btn-icon-circle {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-}
+        /* Center icon in circle button */
+        .btn-icon-circle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
 
-/* Sticky header of table */
-table.table-sticky thead tr:nth-child(1) th {
-	position: sticky;
-	top: 0;
-	z-index: 10;
-}
-
-/* Showing badminton court */
-img.hinhSan {
-	max-width: none;
-	max-height: none;
-	object-fit: cover;
-	width: 100%;
-	height: 100%;
-}
-
-/* Text and line */
-.text-line {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-}
-
-.text-line>:first-child {
-	flex-grow: 0;
-}
-
-.text-line>:nth-child(2) {
-	flex-grow: 1;
-}
-
-.divider {
-	height: 0.8px;
-	background-color: black;
-	opacity: .25;
-}
-</style>
+        /* Sticky header of table */
+        table.table-sticky thead tr:nth-child(1) th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+    </style>
 </head>
 
 <body>
@@ -76,84 +47,21 @@ img.hinhSan {
             <div class="d-flex flex-column flex-shrink-0 p-3 w-100 h-100" style="background-color: #A3D3DF;">
                 <a href="/"
                     class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                    <svg class="bi pe-none me-2" width="40" height="32">
-                        <use xlink:href="#bootstrap"></use>
-                    </svg>
                     <span class="fs-4">Java 5</span>
                 </a>
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
-                    <li class="nav-item" style="height: 40px;">
-                        <a href="#" class="nav-link link-body-emphasis" aria-current="page">
-                            <div class="row">
-                                <div class="col-2 d-flex justify-content-center align-items-center">
-                                    <i class="fa-solid fa-house"></i>
-                                </div>
-                                <div class="col-10 pe-0">
-                                    Trang chủ
-                                </div>
-                            </div>
-                        </a>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link link-body-emphasis">Trang chủ</a>
                     </li>
-                    <li class="nav-item" style="height: 40px;">
-                        <a href="quanlysan" class="nav-link link-body-emphasis">
-                            <div class="row">
-                                <div class="col-2 d-flex justify-content-center align-items-center">
-                                    <i class="fa-regular fa-clipboard"></i>
-                                </div>
-                                <div class="col-10 pe-0">
-                                    Quản lý sân
-                                </div>
-                            </div>
-                        </a>
+                    <li class="nav-item">
+                        <a href="quanlysan" class="nav-link link-body-emphasis">Quản lý sân</a>
                     </li>
-                    <li class="nav-item" style="height: 40px;">
-                        <a href="quanlydatsan" class="nav-link link-body-emphasis">
-                            <div class="row">
-                                <div class="col-2 d-flex justify-content-center align-items-center">
-                                    <i class="fa-solid fa-chalkboard"></i>
-                                </div>
-                                <div class="col-10 pe-0">
-                                    Quản lý đặt sân
-                                </div>
-                            </div>
-                        </a>
+                    <li class="nav-item">
+                        <a href="quanlynhanvien" class="nav-link active">Quản lý nhân viên</a>
                     </li>
-                    <li class="nav-item" style="height: 40px;">
-                        <a href="#" class="nav-link link-body-emphasis">
-                            <div class="row">
-                                <div class="col-2 d-flex justify-content-center align-items-center">
-                                    <i class="fa-solid fa-ticket"></i>
-                                </div>
-                                <div class="col-10 pe-0">
-                                    Quản lý ưu đãi
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item" style="height: 40px;">
-                        <a href="quanlynhanvien" class="nav-link active">
-                            <div class="row">
-                                <div class="col-2 d-flex justify-content-center align-items-center">
-                                    <i class="fa-solid fa-users"></i>
-                                </div>
-                                <div class="col-10 pe-0">
-                                    Quản lý nhân viên
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item" style="height: 40px;">
-                        <a href="#" class="nav-link link-body-emphasis">
-                            <div class="row">
-                                <div class="col-2 d-flex justify-content-center align-items-center">
-                                    <i class="fa-solid fa-id-card"></i>
-                                </div>
-                                <div class="col-10 pe-0">
-                                    Quản lý khách hàng
-                                </div>
-                            </div>
-                        </a>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link link-body-emphasis">Quản lý khách hàng</a>
                     </li>
                 </ul>
                 <hr>
@@ -165,12 +73,6 @@ img.hinhSan {
                         <strong>ABC</strong>
                     </a>
                     <ul class="dropdown-menu text-small shadow">
-                        <!-- <li><a class="dropdown-item" href="#">New project...</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li> -->
                         <li><a class="dropdown-item" href="#">Thoát</a></li>
                     </ul>
                 </div>
@@ -179,23 +81,97 @@ img.hinhSan {
         <div class="col-10 py-3">
             <h3 class="ms-5">Quản lý nhân viên</h3>
             <hr>
-            <!-- Tìm kiếm -->
-            <div class="row px-5 my-3">
-                <form action="" class="col-5 row">
-                    <label for="timNhanVien" class="col-3 col-form-label fw-bold">Nhân viên</label>
-                    <div class="col-9">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Mã/Tên/Số điện thoại/Email" aria-label="Nhân viên" aria-describedby="timNhanVien" id="timNhanVien" name="timNhanVien">
-                            <button class="btn btn-outline-success">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
+
+            <!-- Form thông tin nhân viên -->
+            <div class="container bg-body-tertiary rounded p-4 shadow mb-4">
+                <form:form method="POST" action="/saveEmployee" modelAttribute="nhanVien">
+                    <div class="row">
+                        <div class="col-4 d-flex justify-content-center align-items-center">
+                            <img src="https://img.freepik.com/premium-vector/badminton-player-match-illustration_9245-796.jpg" alt="" width="250" height="250" class="rounded-circle img-fluid">
+                        </div>
+                        <div class="col-8">
+                            <div class="row mb-3">
+                                <label for="maNhanVien" class="col-3 col-form-label fw-bold">Mã nhân viên</label>
+                                <div class="col-9">
+                                    <form:input path="maNhanVien" class="form-control" id="maNhanVien" />
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="tenNhanVien" class="col-3 col-form-label fw-bold">Tên nhân viên</label>
+                                <div class="col-9">
+                                    <form:input path="tenNhanVien" class="form-control" id="tenNhanVien" />
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-3 col-form-label fw-bold">Giới tính</label>
+                                <div class="col-9">
+                                    <div class="form-check form-check-inline">
+                                        <form:radio path="gioiTinh" value="Nam" class="form-check-input" id="nam" />
+                                        <label class="form-check-label" for="nam">Nam</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <form:radio path="gioiTinh" value="Nữ" class="form-check-input" id="nu" />
+                                        <label class="form-check-label" for="nu">Nữ</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="emailNhanVien" class="col-3 col-form-label fw-bold">Email</label>
+                                <div class="col-9">
+                                    <form:input path="emailNhanVien" class="form-control" id="emailNhanVien" type="email" />
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="sdtNhanVien" class="col-3 col-form-label fw-bold">Số điện thoại</label>
+                                <div class="col-9">
+                                    <form:input path="sdtNhanVien" class="form-control" id="sdtNhanVien" />
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-3 col-form-label fw-bold">Vai trò</label>
+                                <div class="col-9">
+                                    <div class="form-check form-check-inline">
+                                        <form:radio path="vaiTro" value="Quản trị" class="form-check-input" id="quanTri" />
+                                        <label class="form-check-label" for="quanTri">Quản trị</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <form:radio path="vaiTro" value="Nhân viên" class="form-check-input" id="nhanVien" />
+                                        <label class="form-check-label" for="nhanVien">Nhân viên</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </form>
+                    <hr>
+                    <div class="row mb-3">
+                        <div class="col-5">
+                            <div class="row">
+                                <label for="matKhau" class="col-4 col-form-label fw-bold">Mật khẩu</label>
+                                <div class="col-8">
+                                    <form:input path="matKhau" class="form-control" id="matKhau" type="password" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-7">
+                            <div class="row">
+                                <label for="xacNhanMatKhau" class="col-5 col-form-label fw-bold">Xác nhận mật khẩu</label>
+                                <div class="col-7">
+                                    <form:input path="xacNhanMatKhau" class="form-control" id="xacNhanMatKhau" type="password" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-evenly">
+                        <button type="submit" class="btn btn-success rounded-pill text-white">Cập nhật thông tin</button>
+                        <button type="button" class="btn btn-danger rounded-pill text-white">Xóa tài khoản</button>
+                    </div>
+                </form:form>
             </div>
+
             <hr>
-            <!-- Danh sách -->
-            <div class="px-5 overflow-auto table-responsive" style="height: 564px; scrollbar-width: thin;">
+
+            <!-- Danh sách nhân viên -->
+            <div class="px-5 overflow-auto table-responsive" style="height: 400px;">
                 <table class="table align-middle mb-0 bg-white">
                     <thead class="bg-light">
                         <tr>
@@ -205,31 +181,34 @@ img.hinhSan {
                             <th>Số điện thoại</th>
                             <th>Email</th>
                             <th>Vai trò</th>
-                            <th>Chi tiết</th>
+                            <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>NV01</td>
-                            <td>Nguyễn Văn A</td>
-                            <td>Nam</td>
-                            <td>0123456789</td>
-                            <td>nguyenvana@gmail.com</td>
-                            <td>Nhân viên</td>
-                            <td>
-                                <button class="btn btn-outline-primary border-0 rounded-pill btn-icon-circle">
-                                    <i class="fa-solid fa-eye"></i>
-                                </button>
-                            </td>
-                        </tr>
+                        <c:forEach var="nhanVien" items="${nhanViens}">
+                            <tr>
+                                <td>${nhanVien.maNhanVien}</td>
+                                <td>${nhanVien.tenNhanVien}</td>
+                                <td>${nhanVien.gioiTinh}</td>
+                                <td>${nhanVien.sdtNhanVien}</td>
+                                <td>${nhanVien.emailNhanVien}</td>
+                                <td>${nhanVien.vaiTro}</td>
+                                <td>
+                                    <a href="/editEmployee/${nhanVien.maNhanVien}" class="btn btn-warning btn-sm">Sửa</a>
+                                    <form action="/deleteEmployee/${nhanVien.maNhanVien}" method="POST" style="display:inline;">
+                                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybHtQGBr4JgW8oLazF2M2gWz6AzMo1f6xdgReUAt03ThD6J4n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-JC2OeS1E63wN+MlHGu3m6T5IQk1e2QmxH1If5sF5DyAk08X64M7Um5L+A1Vx1x+2" crossorigin="anonymous"></script>
 </body>
 
 </html>

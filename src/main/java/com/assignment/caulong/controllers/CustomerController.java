@@ -55,7 +55,7 @@ public class CustomerController {
 			return "errorNotFound";
 		}
 		model.addAttribute("customer", cus);
-		return "customer";
+		return "/KhachHang/ChiTietKhachHang";
 	}
 
 	@GetMapping("/customers")
@@ -65,15 +65,16 @@ public class CustomerController {
 		return "customers";
 	}
 
-	@GetMapping("/customer/create")
-	public String initCustomerCreateForm(Model model) {
-		return "customerCreate";
+	@GetMapping("/customer/edit/{id}")
+	public String initCustomerCreateForm(@PathVariable int id,Model model,@ModelAttribute() Customer customer) {
+		cusRepository.save(customer);
+		return "/KhachHang/ChiTietKhachHang";
 	}
 
 	@PostMapping("/customer/create")
 	public String createCustomer(@ModelAttribute Customer customer) {
 		cusRepository.save(customer);
-		return "customerCreateSuccess";
+		return "/KhachHang/ChiTietKhachHang";
 	}
 
 	

@@ -34,6 +34,10 @@ public class BadmintonCourt {
 	private boolean availability;
 	@OneToMany(mappedBy="badmintoncourt",cascade=CascadeType.ALL)
 	private List<CourtOrder> courtorders; 
+	@OneToMany(mappedBy="badmintoncourt")
+	private List<BadmintonCourtPic> picCourt;
+	
+	
 	public BadmintonCourt() {
 		super();
 	}

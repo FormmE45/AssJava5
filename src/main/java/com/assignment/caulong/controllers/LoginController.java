@@ -12,6 +12,7 @@ import com.assignment.caulong.models.BadmintonCourt;
 import com.assignment.caulong.models.Customer;
 import com.assignment.caulong.models.User;
 import com.assignment.caulong.service.CustomerService;
+import com.assignment.caulong.service.EmployeeService;
 import com.assignment.caulong.service.LoginService;
 
 
@@ -19,12 +20,14 @@ import com.assignment.caulong.service.LoginService;
 public class LoginController {
 	private LoginService loginService;
 	private CustomerService cusService;
+	private EmployeeService empService;
 	
 	@Autowired
-	public LoginController(LoginService loginService,CustomerService cusService) {
+	public LoginController(LoginService loginService,CustomerService cusService,EmployeeService empService) {
 		super();
 		this.loginService = loginService;
 		this.cusService= cusService;
+		this.empService=empService;
 	}
 
 	@GetMapping("/")
@@ -92,4 +95,32 @@ public class LoginController {
 		}
 	}
 	
+	@GetMapping("/loginEmployee")
+	public String GetLoginEmployee(Model model)
+	{
+		User user=new User();
+		model.addAttribute("user", user);
+		return "nhanvien/DangNhapNhanVien";
+	
+	}
+	
+	@PostMapping("/loginEmployee")
+	public String Checklogin(Model model,@ModelAttribute() User user)
+	{
+		System.out.println(user.getUsername());
+		System.out.println(user.getPassword());
+		if(loginService.CheckLoginEm(user.getUsername(), user.getPassword()))
+		{
+			System.out.println("Login Pass");
+			return "redirect:/"; 
+			
+		}
+		else
+		{
+			System.out.println("Login Fail");
+			model.addAttribute("Message", "Login failed, there is an error during the login process");
+			return "redirect:/loginEmployee";
+		}
+		
+	}
 }
