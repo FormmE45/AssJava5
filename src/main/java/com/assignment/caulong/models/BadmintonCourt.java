@@ -32,8 +32,12 @@ public class BadmintonCourt {
 	private String address;
 	@Column(name="TrangThai")
 	private boolean availability;
-	@OneToMany(mappedBy="badmintoncourt",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="badmintonCourt",cascade=CascadeType.ALL)
 	private List<CourtOrder> courtorders; 
+	@OneToMany(mappedBy="badmintonCourt", cascade = CascadeType.ALL)
+	private List<BadmintonCourtPic> badmintonCourtPics;
+	
+	
 	public BadmintonCourt() {
 		super();
 	}

@@ -22,6 +22,31 @@ public class CustomerController {
 		super();
 		this.cusRepository = cusRepository;
 	}
+	
+	@GetMapping("/giohang")
+	public String gioHang() {
+		return "giohang";
+	}
+	
+	@GetMapping("/nhanvien/quanlysan")
+	public String quanlysan() {
+		return "/nhanvien/quanlysan";
+	}
+	
+	@GetMapping("/nhanvien/quanlydatsan")
+	public String quanlydatsan() {
+		return "/nhanvien/quanlydatsan";
+	}
+	
+	@GetMapping("/nhanvien/quanlynhanvien")
+	public String quanlynhanvien() {
+		return "/nhanvien/quanlynhanvien";
+	}
+	
+	@GetMapping("/thongtin")
+	public String thongtin() {
+		return "/thongtincanhan";
+	}
 
 	@GetMapping("/customer/{id}")
 	public String getCustomerById(@PathVariable int id, Model model) {
@@ -30,7 +55,7 @@ public class CustomerController {
 			return "errorNotFound";
 		}
 		model.addAttribute("customer", cus);
-		return "customer";
+		return "/KhachHang/ChiTietKhachHang";
 	}
 
 	@GetMapping("/customers")
@@ -40,15 +65,16 @@ public class CustomerController {
 		return "customers";
 	}
 
-	@GetMapping("/customer/create")
-	public String initCustomerCreateForm(Model model) {
-		return "customerCreate";
+	@GetMapping("/customer/edit/{id}")
+	public String initCustomerCreateForm(@PathVariable int id,Model model,@ModelAttribute() Customer customer) {
+		cusRepository.save(customer);
+		return "/KhachHang/ChiTietKhachHang";
 	}
 
 	@PostMapping("/customer/create")
 	public String createCustomer(@ModelAttribute Customer customer) {
 		cusRepository.save(customer);
-		return "customerCreateSuccess";
+		return "/KhachHang/ChiTietKhachHang";
 	}
 
 	

@@ -32,8 +32,7 @@
 </head>
 
 <body>
-    <!-- Header -->
-    <nav class="navbar navbar-dark navbar-expand-md bg-faded justify-content-center sticky-top"
+    <nav class="navbar navbar-dark navbar-expand-md bg-faded justify-content-center sticky-top mb-4"
         style="background-color: #597a94;">
         <div class="container-fluid px-4">
             <a href="/" class="navbar-brand d-flex w-50 me-auto">Java 5</a>
@@ -43,10 +42,10 @@
             <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
                 <ul class="navbar-nav w-100 justify-content-evenly">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Trang chủ</a>
+                        <a class="nav-link" href="/">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sân</a>
+                        <a class="nav-link" href="/San">Sân</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Shop</a>
@@ -55,7 +54,7 @@
                         <a class="nav-link" href="#">Tin tức</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Dành cho chủ sân</a>
+                        <a class="nav-link" href="nhanvien/quanlydatsan">Dành cho chủ sân</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav ms-auto w-100 justify-content-end align-items-center">
@@ -68,13 +67,18 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/signup">Đăng ký</a>
+                        <a class="nav-link" href="signup">Đăng ký</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">
-                            <span class="btn btn-danger rounded-4 flex-grow-1">Đăng nhập</span>
-                        </a>
-                    </li>
+                   <li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					        <span class="btn btn-danger rounded-4 flex-grow-1">Đăng nhập</span>
+					    </a>
+					    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+					        <li><a class="dropdown-item" href="/loginEmployee">Nhân viên</a></li>
+					        <li><a class="dropdown-item" href="/login">Khách hàng</a></li>
+					    </ul>
+					</li>
+
                 </ul>
             </div>
         </div>
@@ -121,137 +125,72 @@
             <h3>Chọn sân của bạn</h3>
             <button class="btn btn-danger rounded-pill">Hồ Chí Minh</button> <button
                 class="btn btn-outline-danger rounded-pill ms-2">Hà Nội</button>
-            <div class="row flex-nowrap overflow-auto mt-2">
-                <div class="col-4">
-                    <div class="card shadow">
-                        <div class="card-header">Quận 1</div>
-                        <ul class="list-group list-group-flush py-1">
-                            <li class="list-group-item border-0">
-                                <a href="" class="d-flex align-items-center text-black text-decoration-none">
-                                    <div class="">
-                                        <img src="https://thethaothienlong.vn/wp-content/uploads/2022/04/Danh-sach-san-cau-long-o-tphcm-1.jpg"
-                                            alt="" class="rounded-4"
-                                            style="width: 130px; height: 80px; object-fit: cover;">
+            <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
+			<div class="row flex-nowrap overflow-auto mt-2">
+			   <form:form method="post">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-header">Danh sách sân cầu lông</div>
+            <div id="sancauCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <c:forEach var="sancau" items="${cacsancau}">
+                        <c:choose>
+                            <c:when test="${sancau.index == 0}"> <!-- Mục đầu tiên là active -->
+                                <div class="carousel-item active">
+                                    <div class="d-flex align-items-center text-black text-decoration-none">
+                                        <div class="carousel-img">
+                                            <c:forEach var="hinh" items="${sancau.badmintonCourtPics}">
+                                                <img src="${hinh.linkAnh}" alt="" class="rounded-4"
+                                                    style="width: 130px; height: 80px; object-fit: cover;">
+                                            </c:forEach>
+                                        </div>
+                                        <div class="w-100 h-100 ps-2">
+                                            <span>${sancau.Name}</span><br>
+                                            <strong>Giá: ${sancau.Price} VND</strong><br>
+                                            <a href="datNgay/${sancau.id}" class="btn btn-primary">Đặt ngay</a>
+                                            <a href="chiTiet/${sancau.id}" class="btn btn-secondary">Xem chi tiết</a>
+                                        </div>
                                     </div>
-                                    <div class="w-100 h-100 ps-2">
-                                        <span>Sân cầu lông</span>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="carousel-item">
+                                    <div class="d-flex align-items-center text-black text-decoration-none">
+                                        <div class="carousel-img">
+                                            <c:forEach var="hinh" items="${sancau.badmintonCourtPics}">
+                                                <img src="${hinh.linkAnh}" alt="" class="rounded-4"
+                                                    style="width: 130px; height: 80px; object-fit: cover;">
+                                            </c:forEach>
+                                        </div>
+                                        <div class="w-100 h-100 ps-2">
+                                            <span>${sancau.name}</span><br>
+                                            <strong>Giá: ${sancau.price} VND</strong><br>
+                                            <a href="datNgay/${sancau.id}" class="btn btn-primary">Đặt ngay</a>
+                                            <a href="chiTiet/${sancau.id}" class="btn btn-secondary">Xem chi tiết</a>
+                                        </div>
                                     </div>
-                                </a>
-                            </li>
-                            <li class="list-group-item border-0">
-                                <a href="" class="d-flex align-items-center text-black text-decoration-none">
-                                    <div class="">
-                                        <img src="https://tigerturf.com/in/wp-content/uploads/2019/11/How-to-build-a-tennis-court-1440x1080.jpg"
-                                            alt="" class="rounded-4"
-                                            style="width: 130px; height: 80px; object-fit: cover;">
-                                    </div>
-                                    <div class="w-100 h-100 ps-2">
-                                        <span>Sân cầu lông</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="list-group-item border-0">
-                                <a href="" class="d-flex align-items-center text-black text-decoration-none">
-                                    <div class="">
-                                        <img src="https://s42493.pcdn.co/wp-content/uploads/2023/07/courts-scaled.jpg"
-                                            alt="" class="rounded-4"
-                                            style="width: 130px; height: 80px; object-fit: cover;">
-                                    </div>
-                                    <div class="w-100 h-100 ps-2">
-                                        <span>Sân cầu lông</span>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
                 </div>
-                <div class="col-4">
-                    <div class="card shadow">
-                        <div class="card-header">Quận 2</div>
-                        <ul class="list-group list-group-flush py-1">
-                            <li class="list-group-item border-0">
-                                <a href="" class="d-flex align-items-center text-black text-decoration-none">
-                                    <div class="">
-                                        <img src="https://thethaothienlong.vn/wp-content/uploads/2022/04/Danh-sach-san-cau-long-o-tphcm-1.jpg"
-                                            alt="" class="rounded-4"
-                                            style="width: 130px; height: 80px; object-fit: cover;">
-                                    </div>
-                                    <div class="w-100 h-100 ps-2">
-                                        <span>Sân cầu lông</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="list-group-item border-0">
-                                <a href="" class="d-flex align-items-center text-black text-decoration-none">
-                                    <div class="">
-                                        <img src="https://tigerturf.com/in/wp-content/uploads/2019/11/How-to-build-a-tennis-court-1440x1080.jpg"
-                                            alt="" class="rounded-4"
-                                            style="width: 130px; height: 80px; object-fit: cover;">
-                                    </div>
-                                    <div class="w-100 h-100 ps-2">
-                                        <span>Sân cầu lông</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="list-group-item border-0">
-                                <a href="" class="d-flex align-items-center text-black text-decoration-none">
-                                    <div class="">
-                                        <img src="https://s42493.pcdn.co/wp-content/uploads/2023/07/courts-scaled.jpg"
-                                            alt="" class="rounded-4"
-                                            style="width: 130px; height: 80px; object-fit: cover;">
-                                    </div>
-                                    <div class="w-100 h-100 ps-2">
-                                        <span>Sân cầu lông</span>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card shadow">
-                        <div class="card-header">Quận 3</div>
-                        <ul class="list-group list-group-flush py-1">
-                            <li class="list-group-item border-0">
-                                <a href="" class="d-flex align-items-center text-black text-decoration-none">
-                                    <div class="">
-                                        <img src="https://thethaothienlong.vn/wp-content/uploads/2022/04/Danh-sach-san-cau-long-o-tphcm-1.jpg"
-                                            alt="" class="rounded-4"
-                                            style="width: 130px; height: 80px; object-fit: cover;">
-                                    </div>
-                                    <div class="w-100 h-100 ps-2">
-                                        <span>Sân cầu lông</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="list-group-item border-0">
-                                <a href="" class="d-flex align-items-center text-black text-decoration-none">
-                                    <div class="">
-                                        <img src="https://tigerturf.com/in/wp-content/uploads/2019/11/How-to-build-a-tennis-court-1440x1080.jpg"
-                                            alt="" class="rounded-4"
-                                            style="width: 130px; height: 80px; object-fit: cover;">
-                                    </div>
-                                    <div class="w-100 h-100 ps-2">
-                                        <span>Sân cầu lông</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="list-group-item border-0">
-                                <a href="" class="d-flex align-items-center text-black text-decoration-none">
-                                    <div class="">
-                                        <img src="https://s42493.pcdn.co/wp-content/uploads/2023/07/courts-scaled.jpg"
-                                            alt="" class="rounded-4"
-                                            style="width: 130px; height: 80px; object-fit: cover;">
-                                    </div>
-                                    <div class="w-100 h-100 ps-2">
-                                        <span>Sân cầu lông</span>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#sancauCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#sancauCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
+        </div>
+    </div>
+</form:form>
+
+
+			</div>
+
         </div>
 
         <div class="mb-4">

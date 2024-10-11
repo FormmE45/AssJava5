@@ -1,5 +1,7 @@
 package com.assignment.caulong.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.assignment.caulong.models.BadmintonCourt;
 import com.assignment.caulong.models.Customer;
 import com.assignment.caulong.models.User;
+import com.assignment.caulong.repository.BadmintonCourtRepository;
 import com.assignment.caulong.service.CustomerService;
+import com.assignment.caulong.service.EmployeeService;
 import com.assignment.caulong.service.LoginService;
 
 
@@ -19,18 +23,25 @@ import com.assignment.caulong.service.LoginService;
 public class LoginController {
 	private LoginService loginService;
 	private CustomerService cusService;
+	private EmployeeService empService;
 	
 	@Autowired
-	public LoginController(LoginService loginService,CustomerService cusService) {
+	BadmintonCourtRepository badmintonRepo;
+	
+	@Autowired
+	public LoginController(LoginService loginService,CustomerService cusService,EmployeeService empService) {
 		super();
 		this.loginService = loginService;
 		this.cusService= cusService;
+		this.empService=empService;
 	}
 
 	@GetMapping("/")
 	public String getWebSite(Model model)
 	{
-		
+		List<BadmintonCourt> cacSan=badmintonRepo.findAll();
+		System.out.println("Số lượng: "+cacSan.size());
+		model.addAttribute("cacsancau", cacSan);
 		return "index";
 	}
 	
@@ -89,4 +100,32 @@ public class LoginController {
 		}
 	}
 	
+	@GetMapping("/loginEmployee")
+	public String GetLoginEmployee(Model model)
+	{
+		User user=new User();
+		model.addAttribute("user", user);
+		return "nhanvien/DangNhapNhanVien";
+	
+	}
+	
+	@PostMapping("/loginEmployee")
+	public String Checklogin(Model model,@ModelAttribute() User user)
+	{
+		System.out.println(user.getUsername());
+		System.out.println(user.getPassword());
+		if(loginService.CheckLoginEm(user.getUsername(), user.getPassword()))
+		{
+			System.out.println("Login Pass");
+			return "redirect:/"; 
+			
+		}
+		else
+		{
+			System.out.println("Login Fail");
+			model.addAttribute("Message", "Login failed, there is an error during the login process");
+			return "redirect:/loginEmployee";
+		}
+		
+	}
 }

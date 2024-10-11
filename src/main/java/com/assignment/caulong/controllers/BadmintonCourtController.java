@@ -27,5 +27,13 @@ public class BadmintonCourtController {
 	public List<BadmintonCourt> getAllCourt() {
 		return courtRepo.findAll();
 	}
+	
+	@GetMapping("/San")
+	public String getSan(Model model)
+	{
+		
+		model.addAttribute("", model);
+		return "";
+	}
 
 }
