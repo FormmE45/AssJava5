@@ -5,10 +5,9 @@ import org.springframework.stereotype.Repository;
 import com.assignment.caulong.models.Customer;
 import java.util.List;
 
-
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Integer> 
-{
-	Customer findByUsername(String username);
+public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	
+	Customer findByUsername(String username);
+
 }
