@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -102,18 +103,20 @@ img.hinhSan {
 								<div class="col-10 pe-0">Trang chủ</div>
 							</div>
 					</a></li>
-					<li class="nav-item" style="height: 40px;"><a href="quanlysan"
-						class="nav-link link-body-emphasis">
-							<div class="row">
-								<div
-									class="col-2 d-flex justify-content-center align-items-center">
-									<i class="fa-regular fa-clipboard"></i>
+					<li class="nav-item" style="height: 40px;">
+						<a href="badmintonManager"
+							class="nav-link link-body-emphasis">
+								<div class="row">
+									<div
+										class="col-2 d-flex justify-content-center align-items-center">
+										<i class="fa-regular fa-clipboard"></i>
+									</div>
+									<div class="col-10 pe-0">Quản lý sân</div>
 								</div>
-								<div class="col-10 pe-0">Quản lý sân</div>
-							</div>
-					</a></li>
+						</a>
+					</li>
 					<li class="nav-item" style="height: 40px;"><a
-						href="quanlydatsan" class="nav-link active">
+						href="courtOrderManager" class="nav-link active">
 							<div class="row">
 								<div
 									class="col-2 d-flex justify-content-center align-items-center">
@@ -133,7 +136,7 @@ img.hinhSan {
 							</div>
 					</a></li>
 					<li class="nav-item" style="height: 40px;"><a
-						href="quanlynhanvien" class="nav-link link-body-emphasis">
+						href="employeeManager" class="nav-link link-body-emphasis">
 							<div class="row">
 								<div
 									class="col-2 d-flex justify-content-center align-items-center">
@@ -178,16 +181,107 @@ img.hinhSan {
 			<hr>
 			<!-- Tìm kiếm -->
 			<div class="row px-5 my-3">
-				<form action="" class="col-5 row">
-					<label for="timDatSan" class="col-3 col-form-label fw-bold">Sân</label>
-					<div class="col-9">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Mã/Tên"
-								aria-label="Sân" aria-describedby="timDatSan" id="timDatSan"
-								name="timDatSan">
-							<button class="btn btn-outline-success">
-								<i class="fa-solid fa-magnifying-glass"></i>
-							</button>
+				<form action="/courtOrderManager" onsubmit="disableEmptyInputs(this)" id="searchForm">
+					<div class="row mb-2">
+						<div class="col-6">
+							<div class="row">
+								<label for="searchCustomer"
+									class="col-2 col-form-label fw-bold" style="font-size: 15px">Tìm người</label>
+								<div class="col-10">
+									<input type="text" class="form-control"
+										name="searchCustomer" value="${searchCustomer}" />
+								</div>
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="row">
+								<label for="searchCourt"
+									class="col-2 col-form-label fw-bold">Tìm sân</label>
+								<div class="col-10">
+									<input type="text" class="form-control"
+										name="searchCourt" value="${searchCourt}" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-6">
+							<div class="row">
+								<label for="status" class="col-2 col-form-label fw-bold" style="font-size: 15px">Tình trạng</label>
+								<div class="col-10">
+									<select class="form-select" aria-label="Type" name="status">
+										<option value="tatca">Tất cả</option>
+										<c:forEach var="tinhTrangItem" items="${tinhTrang}">
+											<option value="${tinhTrangItem.key}"
+												<c:if test="${searchStatus == tinhTrangItem.key}">selected</c:if>>${tinhTrangItem.value}</option>
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="row">
+								<label class="col-2 col-form-label fw-bold">Thời gian</label>
+						        <div class="col-10 text-center">
+						            <div class="d-flex justify-content-between px-1" style="font-size: 14px; margin-bottom: -11px">
+						                <span id="minTimeText"><fmt:formatNumber type="number" maxFractionDigits="3" value="${minTime}"/></span>
+						                <span id="maxTimeText"><fmt:formatNumber type="number" maxFractionDigits="3" value="${maxTime}"/></span>
+						            </div>
+						            
+						            <div class="row">
+						                <div class="col">
+						                    <input type="range" class="form-range" style="height: 0 !important" id="minSlider" name="minTime"
+						                           min="6" max="22" value="${minTime}" step="1">
+						                </div>
+						                <div class="col">
+						                    <input type="range" class="form-range" style="height: 0 !important" id="maxSlider" name="maxTime"
+						                           min="6" max="22" value="${maxTime}" step="1">
+						                </div>
+						            </div>
+						        </div>
+							</div>
+					        
+						    <script>
+							    const minSlider = document.getElementById('minSlider');
+							    const maxSlider = document.getElementById('maxSlider');
+							    const minTimeText = document.getElementById('minTimeText');
+							    const maxTimeText = document.getElementById('maxTimeText');
+							    
+							    function updateMin() {
+							        let minVal = parseInt(minSlider.value);
+							        let maxVal = parseInt(maxSlider.value);
+	
+							        if (minVal >= maxVal) {
+							            minSlider.value = maxVal - 1;
+							            minVal = maxVal - 1;
+							        }
+	
+							        minTimeText.textContent = minVal.toLocaleString('it-IT');
+							    }
+							    
+							    function updateMax() {
+							        let minVal = parseInt(minSlider.value);
+							        let maxVal = parseInt(maxSlider.value);
+	
+							        if (maxVal <= minVal) {
+							            maxSlider.value = minVal + 1;
+							            maxVal = minVal + 1;
+							        }
+	
+							        maxTimeText.textContent = maxVal.toLocaleString('it-IT');
+							    }
+
+							    minSlider.addEventListener('input', updateMin);
+							    maxSlider.addEventListener('input', updateMax);
+							</script>
+						</div>
+					</div>
+					<div class="d-flex justify-content-end">
+						<div class="mx-2">
+							<button class="w-100 btn btn-success">Search</button>
+						</div>
+						<div class="">
+							<a href="/courtOrderManager" class="w-100 btn btn-primary">Clear</a>
 						</div>
 					</div>
 				</form>
@@ -201,62 +295,95 @@ img.hinhSan {
 						<tr>
 							<th>Mã đặt sân</th>
 							<th>Tên người đặt</th>
+							<th>Tên sân</th>
 							<th>Ngày đặt</th>
 							<th>Thời gian</th>
 							<th>Tình trạng</th>
-							<th>Tùy chọn</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>DS01</td>
-							<td>Nguyễn Văn A</td>
-							<td>25/09</td>
-							<td>8h00 - 9h00 (1h)</td>
-							<td><span class="badge text-bg-success rounded-pill">Hoạt
-									động</span></td>
-							<td>
-								<div class="d-flex justify-content-between"
-									style="width: 130px;">
-									<button class="btn btn-primary border-0 btn-icon-circle">
+						<c:forEach var="courtOrderItem" items="${courtOrders.content}">
+							<tr onclick="window.location='/courtOrderManager/${courtOrderItem.id}';" style="cursor: pointer;">
+								<td>${courtOrderItem.id}</td>
+								<td>${courtOrderItem.customer.name}</td>
+								<td>${courtOrderItem.badmintoncourt.name}</td>
+								<td><fmt:formatDate type="date" pattern="dd/MM" value="${courtOrderItem.date}"/></td>
+								<td>
+									<fmt:formatDate type="time" pattern="HH:mm" value="${courtOrderItem.start}"/>
+									 - 
+									<fmt:formatDate type="time" pattern="HH:mm" value="${courtOrderItem.end}"/>
+								</td>
+								<td>
+									<c:if test="${courtOrderItem.status == 'Đã thanh toán'}">
+										<span class="badge text-bg-success rounded-pill">Đã thanh toán</span>
+									</c:if>
+									<c:if test="${courtOrderItem.status == 'Đang xử lý'}">
+										<span class="badge text-bg-warning rounded-pill text-white">Đang xử lý</span>
+									</c:if>
+								</td>
+								<td>
+									<a href="/courtOrderManager/${courtOrderItem.id}" class="btn btn-primary border-0 btn-sm">
 										<i class="fa-solid fa-eye"></i>
-									</button>
-									<button
-										class="btn btn-warning border-0 btn-icon-circle text-white">
+									</a>
+									<a href="/courtOrderChecked/${courtOrderItem.id}" onclick="return confirm('Are you sure?') ? true : false;"
+										class="btn
+										<c:choose>
+											<c:when test="${courtOrderItem.status == 'Đã thanh toán'}">
+												btn-success disabled
+											</c:when>
+											<c:otherwise>
+												btn-warning
+											</c:otherwise>
+										</c:choose> 
+										border-0 btn-sm text-white">
 										<i class="fa-solid fa-check"></i>
-									</button>
-									<button class="btn btn-danger border-0 btn-icon-circle">
-										<i class="fa-solid fa-ban"></i>
-									</button>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>DS02</td>
-							<td>Nguyễn Văn B</td>
-							<td>25/09</td>
-							<td>15h00 - 16h00 (1h)</td>
-							<td><span
-								class="badge text-bg-warning rounded-pill text-white">Chờ
-									duyệt</span></td>
-							<td>
-								<div class="d-flex justify-content-between"
-									style="width: 130px;">
-									<button class="btn btn-primary border-0 btn-icon-circle">
-										<i class="fa-solid fa-eye"></i>
-									</button>
-									<button
-										class="btn btn-warning border-0 btn-icon-circle text-white">
-										<i class="fa-solid fa-check"></i>
-									</button>
-									<button class="btn btn-danger border-0 btn-icon-circle">
-										<i class="fa-solid fa-ban"></i>
-									</button>
-								</div>
-							</td>
-						</tr>
+									</a>
+								</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
+	            <c:set var="delta" value="2" />
+	            <c:set var="startPage" value="${currentPage - delta < 1 ? 1 : currentPage - delta}" />
+	            <c:set var="endPage" value="${currentPage + delta > courtOrders.totalPages ? courtOrders.totalPages : currentPage + delta}" />
+				<c:if test="${courtOrders.totalPages > 1}">
+		            <nav aria-label="Phân Trang" class="mt-3">
+		                <ul class="pagination justify-content-end">
+		                    <li class="page-item <c:if test='${courtOrders.first}'>disabled</c:if>">
+		                        <a class="page-link" href="${urlString}&page=${courtOrders.first ? 1 : currentPage - 1}">Trước</a>
+		                    </li>
+		
+		                    <c:if test="${startPage > 1}">
+		                        <li class="page-item">
+		                            <a class="page-link" href="${urlString}&page=1">1</a>
+		                        </li>
+		                        <c:if test="${startPage > 2}">
+		                            <li class="page-item disabled"><span class="page-link">...</span></li>
+		                        </c:if>
+		                    </c:if>
+		
+		                    <c:forEach var="page" begin="${startPage}" end="${endPage}">
+		                        <li class="page-item <c:if test='${page == currentPage}'>active</c:if>">
+		                            <a class="page-link" href="${urlString}&page=${page}">${page}</a>
+		                        </li>
+		                    </c:forEach>
+		
+		                    <c:if test="${endPage < courtOrders.totalPages}">
+		                        <c:if test="${endPage < courtOrders.totalPages - 1}">
+		                            <li class="page-item disabled"><span class="page-link">...</span></li>
+		                        </c:if>
+		                        <li class="page-item">
+		                            <a class="page-link" href="${urlString}&page=${courtOrders.totalPages}">${courtOrders.totalPages}</a>
+		                        </li>
+		                    </c:if>
+		
+		                    <li class="page-item <c:if test='${courtOrders.last}'>disabled</c:if>">
+		                        <a class="page-link" href="${urlString}&page=${courtOrders.last ? courtOrders.totalPages : currentPage + 1}">Sau</a>
+		                    </li>
+		                </ul>
+		            </nav>
+	            </c:if>
 			</div>
 		</div>
 	</div>
