@@ -16,7 +16,7 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
-<title>Quản lý nhân viên</title>
+<title>Quản lý khách hàng</title>
 <style type="text/css">
 /* Center icon in button */
 .btn-icon {
@@ -48,7 +48,7 @@ table.table-sticky thead tr:nth-child(1) th {
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
         const page = parseInt(urlParams.get('page')) || 1;
-        const totalPages = ${nhanViens.totalPages};
+        const totalPages = ${customers.totalPages};
 
         if (page < 1) {
             window.location.href = '?page=1';
@@ -121,7 +121,7 @@ table.table-sticky thead tr:nth-child(1) th {
                         </a>
                     </li>
                     <li class="nav-item" style="height: 40px;">
-                        <a href="/employeeManager" class="nav-link active">
+                        <a href="/employeeManager" class="nav-link link-body-emphasis">
                             <div class="row">
                                 <div class="col-2 d-flex justify-content-center align-items-center">
                                     <i class="fa-solid fa-users"></i>
@@ -133,7 +133,7 @@ table.table-sticky thead tr:nth-child(1) th {
                         </a>
                     </li>
                     <li class="nav-item" style="height: 40px;">
-                        <a href="/customerManager" class="nav-link link-body-emphasis">
+                        <a href="/customerManager" class="nav-link active">
                             <div class="row">
                                 <div class="col-2 d-flex justify-content-center align-items-center">
                                     <i class="fa-solid fa-id-card"></i>
@@ -154,19 +154,13 @@ table.table-sticky thead tr:nth-child(1) th {
                         <strong>ABC</strong>
                     </span>
                     <ul class="dropdown-menu text-small shadow">
-                        <!-- <li><a class="dropdown-item" href="#">New project...</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li> -->
                         <li><a class="dropdown-item" href="#">Thoát</a></li>
                     </ul>
                 </div>
             </div>
         </div>
 		<div class="col-lg-10 col-xs-12 col-sm-12 py-3">
-			<h3><a href="/employeeManager" class="text-decoration-none text-reset ms-5">Quản lý nhân viên</a></h3>
+			<a href="/customerManager" class="text-decoration-none text-reset"><h3 class="ms-5">Quản lý khách hàng</h3></a>
 			<hr>
 			<c:if test="${not empty errorNotFound}">
 				<div class="rounded-4 bg-danger-subtle p-3 mt-1 mb-3 text-danger">${errorNotFound}</div>
@@ -174,61 +168,120 @@ table.table-sticky thead tr:nth-child(1) th {
 			
 			<!-- Form thông tin nhân viên -->
 			<div class="container bg-body-tertiary rounded p-4 shadow mb-4">
-				<form:form method="POST" action="/employeeUpdate"
-					modelAttribute="employee">
+				<form:form method="POST" action="/customerUpdate" modelAttribute="customer">
 					<div class="row">
-						<div
-							class="col-4 d-flex justify-content-center align-items-center">
-							<img
-								src="https://img.freepik.com/premium-vector/badminton-player-match-illustration_9245-796.jpg"
-								alt="" width="250" height="250" class="rounded-circle img-fluid">
+						<div class="col-6">
+							<div class="row mb-3">
+								<label for="id" class="col-3 col-form-label fw-bold">
+									Mã khách hàng
+								</label>
+								<div class="col-9">
+									<form:input path="id" class="form-control" readonly="true" />
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="name" class="col-3 col-form-label fw-bold">
+									Họ tên
+								</label>
+								<div class="col-9">
+									<form:input path="name" class="form-control" />
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="phoneNumber" class="col-3 col-form-label fw-bold">
+									Số điện thoại
+								</label>
+								<div class="col-9">
+									<form:input path="phoneNumber" class="form-control" />
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="address" class="col-3 col-form-label fw-bold">
+									Địa chỉ
+								</label>
+								<div class="col-9">
+									<form:input path="address" class="form-control" />
+								</div>
+							</div>
 						</div>
-						<div class="col-8">
+						<div class="col-6">
 							<div class="row mb-3">
-								<label for="id" class="col-3 col-form-label fw-bold">Mã
-									nhân viên</label>
+								<label for="email" class="col-3 col-form-label fw-bold">
+									Email
+								</label>
 								<div class="col-9">
-									<form:input path="id" class="form-control" id="id"
-										readonly="true" />
+									<form:input type="email" path="email" class="form-control" />
 								</div>
 							</div>
 							<div class="row mb-3">
-								<label for="name" class="col-3 col-form-label fw-bold">Tên
-									nhân viên</label>
+								<label for="username" class="col-3 col-form-label fw-bold">
+									Tên đăng nhập
+								</label>
 								<div class="col-9">
-									<form:input path="name" class="form-control" id="name" />
+									<form:input path="username" class="form-control" />
 								</div>
 							</div>
 							<div class="row mb-3">
-								<label for="username" class="col-3 col-form-label fw-bold">Tên
-									đăng nhập</label>
+								<label for="password" class="col-3 col-form-label fw-bold">
+									Mật khẩu
+								</label>
 								<div class="col-9">
-									<form:input path="username" class="form-control" id="username" />
-								</div>
-							</div>
-							<div class="row mb-3">
-								<label for="role" class="col-3 col-form-label fw-bold">Vai
-									trò</label>
-								<div class="col-9">
-									<form:input path="role" class="form-control" id="role" />
-								</div>
-							</div>
-							<div class="row mb-3">
-								<label for="password" class="col-3 col-form-label fw-bold">Mật
-									khẩu</label>
-								<div class="col-9">
-									<form:input path="password" class="form-control" id="password"
-										type="password" />
+									<form:input path="password" class="form-control" type="password" />
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="d-flex justify-content-evenly w-50 ms-auto mt-3">
-						<a href="/employeeAdd" class="btn btn-primary rounded-pill text-white">Thêm Nhân Viên</a>
+					<div class="mt-3 text-end">
 						<button type="submit" class="btn btn-success rounded-pill text-white">Cập nhật thông tin</button>
-						<a href="/employeeRemove/${nhanVien.id}" class="btn btn-danger rounded-pill text-white" onclick="return confirm('Are you sure?') ? true : false;">Xóa tài khoản</a>
+						<a href="/customerRemove/${customer.id}" class="btn btn-danger rounded-pill text-white" onclick="return confirm('Are you sure?') ? true : false;">Xóa tài khoản</a>
 					</div>
 				</form:form>
+			</div>
+			<hr>
+			<!-- Tìm kiếm -->
+			<div class="row px-5 my-3">
+				<h3>Tìm kiếm</h3>
+				<form action="/customerManager" onsubmit="disableEmptyInputs(this)" id="searchForm">
+					<div class="row mb-2">
+						<div class="col-3">
+							<div class="row">
+								<label for="searchName"
+									class="col-2 col-form-label fw-bold" style="font-size: 15px">Tên</label>
+								<div class="col-10">
+									<input type="text" class="form-control"
+										name="searchName" value="${searchName}" />
+								</div>
+							</div>
+						</div>
+						<div class="col-4">
+							<div class="row">
+								<label for="searchPhone"
+									class="col-4 col-form-label fw-bold">Số điện thoại</label>
+								<div class="col-8">
+									<input type="text" class="form-control"
+										name="searchPhone" value="${searchPhone}" />
+								</div>
+							</div>
+						</div>
+						<div class="col-5">
+							<div class="row">
+								<label for="searchAddress" class="col-2 col-form-label fw-bold" style="font-size: 15px">Địa chỉ</label>
+								<div class="col-10">
+									<input type="text" class="form-control"
+										name="searchAddress" value="${searchAddress}" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="d-flex justify-content-end">
+						<div class="mx-2">
+							<button class="w-100 btn btn-success">Search</button>
+						</div>
+						<div class="">
+							<a href="/customerManager" class="w-100 btn btn-primary">Clear</a>
+						</div>
+					</div>
+				</form>
 			</div>
 			<hr>
 			
@@ -237,23 +290,25 @@ table.table-sticky thead tr:nth-child(1) th {
 				<table class="table align-middle mb-0 bg-white">
 					<thead class="bg-light">
 						<tr>
-							<th>Mã nhân viên</th>
-							<th>Tên nhân viên</th>
+							<th>Mã</th>
+							<th>Họ tên</th>
+							<th>Số điện thoại</th>
+							<th>Địa chỉ</th>
 							<th>Tên đăng nhập</th>
-							<th>Vai trò</th>
-							<th>Thao tác</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="nv" items="${nhanViens.content}">
-							<tr onclick="window.location='/employeeManager/${nv.id}';" style="cursor: pointer;">
-								<td>${nv.id}</td>
-								<td>${nv.name}</td>
-								<td>${nv.username}</td>
-								<td>${nv.role}</td>
+						<c:forEach var="customer" items="${customers.content}">
+							<tr onclick="window.location='/customerManager/${customer.id}';" style="cursor: pointer;">
+								<td>${customer.id}</td>
+								<td>${customer.name}</td>
+								<td>${customer.phoneNumber}</td>
+								<td>${customer.address}</td>
+								<td>${customer.username}</td>
 								<td>
-									<a href="/employeeManager/${nv.id}" class="btn btn-outline-warning border-0 btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-									<a href="/employeeRemove/${nv.id}" class="btn btn-outline-danger border-0 btn-sm" onclick="return confirm('Are you sure?') ? true : false;"><i class="fa-solid fa-ban"></i></a>
+									<a href="/customerManager/${customer.id}" class="btn btn-outline-warning border-0 btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+									<a href="/customerRemove/${customer.id}" class="btn btn-outline-danger border-0 btn-sm" onclick="return confirm('Are you sure?') ? true : false;"><i class="fa-solid fa-ban"></i></a>
 								</td>
 							</tr>
 						</c:forEach>

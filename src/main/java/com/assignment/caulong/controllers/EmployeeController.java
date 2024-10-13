@@ -32,25 +32,29 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/employeeManager")
-	public String employee(Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
+	public String employee(Model model, 
+			@RequestParam(value = "page", required = false, defaultValue = "1") int page) {
 		Employee employee = new Employee();
 		model.addAttribute("employee", employee);
 		if (page < 1) {
             return "redirect:/employeeManager";
         }
 		
-		Page<Employee> employeeList = empService.findAll(page - 1);
+		Page<Employee> employeeList = empService.findSearch(page);
 		model.addAttribute("nhanViens", employeeList);
 		model.addAttribute("currentPage", page);
 		return "/nhanvien/quanlynhanvien";
 	}
 
 	@GetMapping("/employeeManager/{id}")
-	public String editEmployee(@PathVariable("id") Optional<String> id, Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
+	public String editEmployee(Model model, 
+			@PathVariable("id") Optional<String> id, 
+			@RequestParam(value = "page", required = false, defaultValue = "1") int page) {
 		if (page < 1) {
             return "redirect:/employeeManager/" + id.get();
         }
-		Page<Employee> employeeList = empService.findAll(page - 1);
+		
+		Page<Employee> employeeList = empService.findSearch(page);
 		Optional<Employee> employeeFound = empRepo.findById(id.orElse(""));
 		Employee employee = new Employee();
 		if(employeeFound.isPresent())
@@ -66,7 +70,8 @@ public class EmployeeController {
 	}
 
 	@PostMapping("/employeeUpdate")
-	public String updateEmployee(Model model, @ModelAttribute("employee") Employee employee) {
+	public String updateEmployee(Model model, 
+			@ModelAttribute("employee") Employee employee) {
 		Optional<Employee> found = empRepo.findById(employee.getId());
 		if(found.isPresent())
 			empRepo.save(employee);
@@ -74,7 +79,8 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/employeeRemove/{id}")
-	public String removeEmployee(Model model, @PathVariable("id") Optional<String> id) {
+	public String removeEmployee(Model model, 
+			@PathVariable("id") Optional<String> id) {
 		if (!id.isEmpty()) {
 			Optional<Employee> employee = empRepo.findById(id.orElse(null));
 			if (employee.isPresent()) {
@@ -99,7 +105,9 @@ public class EmployeeController {
 	}
 
 	@PostMapping("/employeeAdd")
-	public String saveEmployee(Model model, @Validated @ModelAttribute Employee employee, BindingResult result) {
+	public String saveEmployee(Model model, 
+			@Validated @ModelAttribute Employee employee, 
+			BindingResult result) {
 		
 		if(result.hasErrors())
 			return "/nhanvien/ThemNhanVien";

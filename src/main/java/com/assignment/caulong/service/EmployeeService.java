@@ -13,25 +13,23 @@ import com.assignment.caulong.repository.EmployeeRepository;
 @Service
 public class EmployeeService {
 	
-	private EmployeeRepository empRepo;
+	private EmployeeRepository repo;
 
 	@Autowired
-	public EmployeeService(EmployeeRepository empRepo) {
-		super();
-		this.empRepo = empRepo;
+	public EmployeeService(EmployeeRepository repo) {
+		this.repo = repo;
 	}
 
 	public Employee getByUserName(String userName) {
-		return empRepo.findByUsername(userName);
+		return repo.findByUsername(userName);
 	}
 
 	public Employee save(Employee emp) {
-		return empRepo.save(emp);
+		return repo.save(emp);
 	}
 	
-	public Page<Employee> findAll(int pageNumber) {
-		Sort sort = Sort.by(Sort.Direction.ASC, "id");
-		Pageable pageable = PageRequest.of(pageNumber, 10, sort);
-		return empRepo.findAll(pageable);
+	public Page<Employee> findSearch(int page) {
+		Pageable pageable = PageRequest.of(page - 1, 10);
+		return repo.findAll(pageable);
 	}
 }

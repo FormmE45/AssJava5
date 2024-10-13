@@ -36,7 +36,6 @@ public class CourtOrderController {
 			@RequestParam(value = "status", required = false) String status,
 			@RequestParam(value = "minTime", required = false, defaultValue = "6") int minTime,
 			@RequestParam(value = "maxTime", required = false, defaultValue = "22") int maxTime) { 
-		
 		Map<String, Object> params = new LinkedHashMap<>();
 		params.put("searchCustomer", searchCustomer);
 		params.put("searchCourt", searchCourt);

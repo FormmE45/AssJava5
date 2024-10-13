@@ -101,7 +101,7 @@
                         </a>
                     </li>
                     <li class="nav-item" style="height: 40px;">
-                        <a href="#" class="nav-link link-body-emphasis">
+                        <a href="/customerManager" class="nav-link link-body-emphasis">
                             <div class="row">
                                 <div class="col-2 col-md-0 d-flex justify-content-center align-items-center">
                                     <i class="fa-solid fa-id-card"></i>
@@ -114,7 +114,7 @@
                     </li>
                 </ul>
                 <hr>
-                <div class="dropdown">
+                <div class="dropup">
                     <a href="#"
                         class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
                         data-bs-toggle="dropdown" aria-expanded="false">

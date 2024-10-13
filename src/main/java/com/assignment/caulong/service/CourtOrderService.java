@@ -22,7 +22,7 @@ public class CourtOrderService {
 	}
 	
 	public Page<CourtOrder> findAll(String searchCustomer, String searchCourt, String status, int min, int max, int page) {
-		Pageable pageable = PageRequest.of(page - 1, 10, Sort.by(Sort.Direction.ASC, "id"));
+		Pageable pageable = PageRequest.of(page - 1, 10);
 		
 		if(searchCustomer != null) {
 			if(!searchCustomer.isBlank())

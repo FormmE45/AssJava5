@@ -93,8 +93,8 @@ img.hinhSan {
 				</a>
 				<hr>
 				<ul class="nav nav-pills flex-column mb-auto">
-					<li class="nav-item" style="height: 40px;"><a href="#"
-						class="nav-link link-body-emphasis" aria-current="page">
+					<li class="nav-item" style="height: 40px;">
+						<a href="#" class="nav-link link-body-emphasis" aria-current="page">
 							<div class="row">
 								<div
 									class="col-2 d-flex justify-content-center align-items-center">
@@ -102,62 +102,62 @@ img.hinhSan {
 								</div>
 								<div class="col-10 pe-0">Trang chủ</div>
 							</div>
-					</a></li>
-					<li class="nav-item" style="height: 40px;">
-						<a href="badmintonManager"
-							class="nav-link link-body-emphasis">
-								<div class="row">
-									<div
-										class="col-2 d-flex justify-content-center align-items-center">
-										<i class="fa-regular fa-clipboard"></i>
-									</div>
-									<div class="col-10 pe-0">Quản lý sân</div>
-								</div>
 						</a>
 					</li>
-					<li class="nav-item" style="height: 40px;"><a
-						href="courtOrderManager" class="nav-link active">
+					<li class="nav-item" style="height: 40px;">
+						<a href="/badmintonManager" class="nav-link link-body-emphasis">
 							<div class="row">
 								<div
 									class="col-2 d-flex justify-content-center align-items-center">
+									<i class="fa-regular fa-clipboard"></i>
+								</div>
+								<div class="col-10 pe-0">Quản lý sân</div>
+							</div>
+						</a>
+					</li>
+					<li class="nav-item" style="height: 40px;">
+						<a href="/courtOrderManager" class="nav-link active">
+							<div class="row">
+								<div class="col-2 d-flex justify-content-center align-items-center">
 									<i class="fa-solid fa-chalkboard"></i>
 								</div>
 								<div class="col-10 pe-0">Quản lý đặt sân</div>
 							</div>
-					</a></li>
-					<li class="nav-item" style="height: 40px;"><a href="#"
-						class="nav-link link-body-emphasis">
+						</a>
+					</li>
+					<li class="nav-item" style="height: 40px;">
+						<a href="#" class="nav-link link-body-emphasis">
 							<div class="row">
-								<div
-									class="col-2 d-flex justify-content-center align-items-center">
+								<div class="col-2 d-flex justify-content-center align-items-center">
 									<i class="fa-solid fa-ticket"></i>
 								</div>
 								<div class="col-10 pe-0">Quản lý ưu đãi</div>
 							</div>
-					</a></li>
-					<li class="nav-item" style="height: 40px;"><a
-						href="employeeManager" class="nav-link link-body-emphasis">
+						</a>
+					</li>
+					<li class="nav-item" style="height: 40px;">
+						<a href="/employeeManager" class="nav-link link-body-emphasis">
 							<div class="row">
-								<div
-									class="col-2 d-flex justify-content-center align-items-center">
+								<div class="col-2 d-flex justify-content-center align-items-center">
 									<i class="fa-solid fa-users"></i>
 								</div>
 								<div class="col-10 pe-0">Quản lý nhân viên</div>
 							</div>
-					</a></li>
-					<li class="nav-item" style="height: 40px;"><a href="#"
-						class="nav-link link-body-emphasis">
+						</a>
+					</li>
+					<li class="nav-item" style="height: 40px;">
+						<a href="/customerManager" class="nav-link link-body-emphasis">
 							<div class="row">
-								<div
-									class="col-2 d-flex justify-content-center align-items-center">
+								<div class="col-2 d-flex justify-content-center align-items-center">
 									<i class="fa-solid fa-id-card"></i>
 								</div>
 								<div class="col-10 pe-0">Quản lý khách hàng</div>
 							</div>
-					</a></li>
+						</a>
+					</li>
 				</ul>
 				<hr>
-				<div class="dropdown">
+				<div class="dropup">
 					<a href="#"
 						class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
 						data-bs-toggle="dropdown" aria-expanded="false"> <img
@@ -186,7 +186,7 @@ img.hinhSan {
 						<div class="col-6">
 							<div class="row">
 								<label for="searchCustomer"
-									class="col-2 col-form-label fw-bold" style="font-size: 15px">Tìm người</label>
+									class="col-2 col-form-label fw-bold py-0" style="font-size: 13px">Tìm tên người đặt</label>
 								<div class="col-10">
 									<input type="text" class="form-control"
 										name="searchCustomer" value="${searchCustomer}" />

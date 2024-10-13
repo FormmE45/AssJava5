@@ -45,10 +45,9 @@
 				</form:select>
 			</div>
 
-
 			<div class="mb-3">
 				<label for="password" class="form-label">Mật Khẩu</label>
-				<form:input type="password" path="password" class="form-control" id="password" />
+				<form:input path="password" class="form-control" id="password" />
 				<form:errors path="password" class="text-danger" />
 			</div>
 
