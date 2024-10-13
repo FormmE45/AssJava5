@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html xmlns:form="http://www.springframework.org/tags/form">
 <head>
@@ -11,7 +14,7 @@
     <div class="container mt-4">
         <h2>Customer Information</h2>
         <!-- Form hiển thị thông tin khách hàng -->
-        <form:form modelAttribute="customer" class="row g-3">
+        <form:form modelAttribute="customer" class="row g-3" enctype="multipart/form-data">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">

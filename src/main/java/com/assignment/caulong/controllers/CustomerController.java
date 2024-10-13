@@ -28,21 +28,6 @@ public class CustomerController {
 		return "giohang";
 	}
 	
-	@GetMapping("/nhanvien/quanlysan")
-	public String quanlysan() {
-		return "/nhanvien/quanlysan";
-	}
-	
-	@GetMapping("/nhanvien/quanlydatsan")
-	public String quanlydatsan() {
-		return "/nhanvien/quanlydatsan";
-	}
-	
-	@GetMapping("/nhanvien/quanlynhanvien")
-	public String quanlynhanvien() {
-		return "/nhanvien/quanlynhanvien";
-	}
-	
 	@GetMapping("/thongtin")
 	public String thongtin() {
 		return "/thongtincanhan";
@@ -54,6 +39,7 @@ public class CustomerController {
 		if (cus == null) {
 			return "errorNotFound";
 		}
+		System.out.println(cus.getName());
 		model.addAttribute("customer", cus);
 		return "/KhachHang/ChiTietKhachHang";
 	}

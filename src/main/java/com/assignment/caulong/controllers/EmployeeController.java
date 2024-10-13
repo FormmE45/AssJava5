@@ -99,5 +99,18 @@ public class EmployeeController {
 		return "/nhanvien/ThemNhanVien";
 	}
 	
+	@GetMapping("/nhanvien/quanlysan")
+	public String quanlysan() {
+		return "/nhanvien/quanlysan";
+	}
 	
+	@GetMapping("/nhanvien/quanlydatsan")
+	public String quanlydatsan() {
+		return "/nhanvien/quanlydatsan";
+	}
+	
+	@GetMapping("/nhanvien/quanlynhanvien")
+	public String quanlynhanvien() {
+		return "/nhanvien/quanlynhanvien";
+	}
 }
