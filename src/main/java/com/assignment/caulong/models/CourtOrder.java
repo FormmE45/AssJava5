@@ -21,7 +21,7 @@ public class CourtOrder {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="MaDatSan")
-	private int courtOrderId;
+	private int id;
 	
 	@ManyToOne
 	@JoinColumn(name="MaKhachHang")
@@ -45,10 +45,10 @@ public class CourtOrder {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CourtOrder(int courtOrderId, Customer customer, BadmintonCourt badmintoncourt, Date date, Time start,
+	public CourtOrder(int id, Customer customer, BadmintonCourt badmintoncourt, Date date, Time start,
 			Time end, String status) {
 		super();
-		this.courtOrderId = courtOrderId;
+		this.id = id;
 		this.customer = customer;
 		this.badmintonCourt = badmintoncourt;
 		this.date = date;
@@ -58,12 +58,12 @@ public class CourtOrder {
 	}
 
 
-	public int getCourtOrderId() {
-		return courtOrderId;
+	public int getId() {
+		return id;
 	}
 
-	public void setCourtOrderId(int courtOrderId) {
-		this.courtOrderId = courtOrderId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Customer getCustomer() {
@@ -113,7 +113,5 @@ public class CourtOrder {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	
 
 }
