@@ -36,14 +36,7 @@ public class LoginController {
 		this.empService=empService;
 	}
 
-	@GetMapping("/")
-	public String getWebSite(Model model)
-	{
-		List<BadmintonCourt> cacSan=badmintonRepo.findAll();
-		System.out.println("Số lượng: "+cacSan.size());
-		model.addAttribute("cacsancau", cacSan);
-		return "index";
-	}
+	
 	
 	@GetMapping("/login")
 	public String getLogin(Model model)

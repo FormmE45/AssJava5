@@ -2,17 +2,28 @@ package com.assignment.caulong.models;
 
 import java.util.List;
 
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "SanCau")
 public class BadmintonCourt {
@@ -36,26 +47,10 @@ public class BadmintonCourt {
 	private String address;
 	@Column(name = "TrangThai")
 	private boolean availability;
-	@OneToMany(mappedBy = "badmintonCourt", cascade = CascadeType.ALL)
-	private List<CourtOrder> courtorders;
+	@OneToMany(mappedBy="badmintonCourt",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<CourtOrder> courtorders; 
 	@OneToMany(mappedBy = "badmintonCourt", cascade = CascadeType.ALL)
 	private List<BadmintonCourtPic> badmintonCourtPics;
-
-	public BadmintonCourt() {
-		super();
-	}
-	
-	public BadmintonCourt(int id, String name, String type, double price, String description, String address,
-			boolean availability) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.type = type;
-		this.price = price;
-		this.description = description;
-		this.address = address;
-		this.availability = availability;
-	}
 
 	public int getId() {
 		return id;

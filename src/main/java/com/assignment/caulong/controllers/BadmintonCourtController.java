@@ -166,5 +166,14 @@ public class BadmintonCourtController {
 		map.put("tphcm", "Hồ Chí Minh");
 		return map;
 	}
+	
+	@GetMapping("/badmintonDetail/{id}")
+	public String GetBadmintonDetail(Model model,@PathVariable() int id)
+	{
+		BadmintonCourt badmintonCourt=courtRepo.findById(id).orElse(null);
+		System.out.println(badmintonCourt.getName());
+		model.addAttribute("san", badmintonCourt);
+		return "ChiTietSan";
+	}
 
 }

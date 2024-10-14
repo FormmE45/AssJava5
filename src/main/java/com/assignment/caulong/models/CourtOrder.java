@@ -14,7 +14,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "DatSanCau")
 public class CourtOrder {
@@ -39,6 +41,9 @@ public class CourtOrder {
 	private Time end;
 	@Column(name="TrangThaiDat")
 	private String status;
+	
+	
+	
 	
 	public CourtOrder() {
 		super();

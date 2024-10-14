@@ -39,6 +39,7 @@ public class CustomerController {
 		if (cus == null) {
 			return "errorNotFound";
 		}
+		System.out.println(cus.getName());
 		model.addAttribute("customer", cus);
 		return "/KhachHang/ChiTietKhachHang";
 	}
