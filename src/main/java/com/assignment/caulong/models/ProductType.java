@@ -6,7 +6,9 @@ import java.util.List;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name="LoaiSanPham")
 public class ProductType {

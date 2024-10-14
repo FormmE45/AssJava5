@@ -134,5 +134,4 @@ public class EmployeeController {
 		return "redirect:/employeeManager";
 	}
 
->>>>>>> 76d079270c780fa6e04227c661883ef5294edbb6
 }

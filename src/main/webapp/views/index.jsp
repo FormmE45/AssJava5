@@ -159,7 +159,7 @@ nav .nav-link:hover {
                                         <p class="card-text"><strong>Giá: ${sancau.price} VND</strong></p>
                                         <div class="d-flex justify-content-center">
                                             <a href="datNgay/${sancau.id}" class="btn btn-primary me-2">Đặt ngay</a>
-                                            <a href="chiTiet/${sancau.id}" class="btn btn-secondary">Xem chi tiết</a>
+                                            <a href="/badmintonDetail/${sancau.id}" class="btn btn-secondary">Xem chi tiết</a>
                                         </div>
                                     </div>
                                 </div>
@@ -238,75 +238,57 @@ nav .nav-link:hover {
 
 
 
-		<div class="mb-4">
-			<h3>Phụ kiện</h3>
-			<div class="row">
-				<div class="col-3">
-					<div class="card shadow">
-						<img
-							src="https://product.hstatic.net/1000341630/product/fix_wweb-02_904663092c6e41fbb6cffee7844ce302_master.jpg"
-							class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Vợt cầu lông Tiến Minh Legend Limited</h5>
-							<p class="card-text fs-5">
-								Giá: <span>1.500.000đ</span>
-							</p>
-							<div class="d-flex justify-content-center">
-								<a href="#" class="btn btn-outline-danger">Thêm vào giỏ hàng</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-3">
-					<div class="card shadow">
-						<img
-							src="https://product.hstatic.net/1000341630/product/fix_wweb-02_904663092c6e41fbb6cffee7844ce302_master.jpg"
-							class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Vợt cầu lông Tiến Minh Legend Limited</h5>
-							<p class="card-text fs-5">
-								Giá: <span>1.500.000đ</span>
-							</p>
-							<div class="d-flex justify-content-center">
-								<a href="#" class="btn btn-outline-danger">Thêm vào giỏ hàng</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-3">
-					<div class="card shadow">
-						<img
-							src="https://product.hstatic.net/1000341630/product/fix_wweb-02_904663092c6e41fbb6cffee7844ce302_master.jpg"
-							class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Vợt cầu lông Tiến Minh Legend Limited</h5>
-							<p class="card-text fs-5">
-								Giá: <span>1.500.000đ</span>
-							</p>
-							<div class="d-flex justify-content-center">
-								<a href="#" class="btn btn-outline-danger">Thêm vào giỏ hàng</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-3">
-					<div class="card shadow">
-						<img
-							src="https://product.hstatic.net/1000341630/product/fix_wweb-02_904663092c6e41fbb6cffee7844ce302_master.jpg"
-							class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Vợt cầu lông Tiến Minh Legend Limited</h5>
-							<p class="card-text fs-5">
-								Giá: <span>1.500.000đ</span>
-							</p>
-							<div class="d-flex justify-content-center">
-								<a href="#" class="btn btn-outline-danger">Thêm vào giỏ hàng</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+<div class="mb-4">
+    <h3>Phụ kiện</h3>
+    <div class="row">
+        <c:forEach var="sanpham" items="${cacSanPham}">
+            <div class="col-md-3 mt-4">
+                <a href="/productDetail/${sanpham.maSanPham}" class="text-decoration-none text-dark">
+                    <div class="card shadow">
+                        <div id="carousel-${sanpham.maSanPham}" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <c:choose>
+                                    <c:when test="${empty sanpham.productImages}">
+                                        <div class="carousel-item active">
+                                            <img src="/image/NullPic.jpg" class="d-block" alt="Default Image" style="width: 304px; height: 200px; object-fit: cover;">
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:forEach var="image" items="${sanpham.productImages}" varStatus="status">
+                                            <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
+                                                <img src="/image/${image.duongDanHinh}" class="d-block" alt="${sanpham.tenSanPham}" style="width: 304px; height: 200px; object-fit: cover;">
+                                            </div>
+                                        </c:forEach>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${sanpham.maSanPham}" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel-${sanpham.maSanPham}" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">${sanpham.tenSanPham}</h5>
+                            <p class="card-text fs-5">
+                                Giá: <span>${sanpham.donGia}đ</span>
+                            </p>
+                            <div class="d-flex justify-content-evenly">
+                                <a href="themGioHang/${sanpham.maSanPham}" class="btn btn-outline-danger me-2">Thêm vào giỏ hàng</a>
+                                <a href="/productDetail/${sanpham.maSanPham}" class="btn btn-danger">Xem chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </c:forEach>
+    </div>
+</div>
+
+
 	</div>
 
 	<!-- Footer -->

@@ -2,16 +2,19 @@ package com.assignment.caulong.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.assignment.caulong.models.Product;
 import com.assignment.caulong.repository.ProductRepository;
 
 @Controller
 public class ProductController {
-
+	
+	@Autowired
 	ProductRepository prodRepo;
 	
 	@GetMapping("/productList")
@@ -21,6 +24,14 @@ public class ProductController {
 		model.addAttribute("", products);
 		
 		return "DanhSachSanPham";
+	}
+	
+	@GetMapping("/productDetail/{maSanPham}")
+	public String getProductDetail(Model model,@PathVariable("maSanPham") String maSanPham)
+	{
+		Product product=prodRepo.findById(maSanPham).orElse(null);
+		model.addAttribute("product", product);
+		return "/SanPham/ChiTietSanPham";
 	}
 	
 }

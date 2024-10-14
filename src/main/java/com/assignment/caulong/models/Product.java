@@ -1,10 +1,14 @@
 package com.assignment.caulong.models;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +34,8 @@ public class Product {
 	private ProductType loaiSanPham;
     @Column(name="MoTa")
     private String moTa;
+    @OneToMany(mappedBy = "prouduct", cascade = CascadeType.ALL)
+    private List<ProductImage> productImages;
 
    
 }
