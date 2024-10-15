@@ -58,12 +58,12 @@ nav .nav-link:hover {
 					<li class="nav-item"><a class="nav-link" href="#">Tin tức</a>
 					</li>
 					<li class="nav-item"><a class="nav-link"
-						href="nhanvien/quanlydatsan">Dành cho chủ sân</a></li>
+						href="${pageContext.request.contextPath}/employeeManager">Dành cho chủ sân</a></li>
 				</ul>
 				<ul
 					class="nav navbar-nav ms-auto w-100 justify-content-end align-items-center">
 					<li class="nav-item pe-4"><a
-						class="nav-link position-relative" href="#"> <i
+						class="nav-link position-relative" href="/customer/giohang"> <i
 							class="fa-solid fa-cart-shopping fa-xl"></i> <span
 							class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">99
 								<span class="visually-hidden">số lượng</span>
@@ -78,9 +78,9 @@ nav .nav-link:hover {
 								nhập</span>
 					</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="/loginEmployee">Nhân
+							<li><a class="dropdown-item" href="employee/loginEmployee">Nhân
 									viên</a></li>
-							<li><a class="dropdown-item" href="/login">Khách hàng</a></li>
+							<li><a class="dropdown-item" href="customer/login">Khách hàng</a></li>
 						</ul></li>
 
 				</ul>

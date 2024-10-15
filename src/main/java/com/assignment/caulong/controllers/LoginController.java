@@ -37,15 +37,15 @@ public class LoginController {
 
 	
 	
-	@GetMapping("/login")
-	public String getLogin(Model model)
-	{
-		User user=new User();
-		model.addAttribute("user", user);
-		return "DangNhap";
-	}
+//	@GetMapping("customer/login")
+//	public String getLogin(Model model)
+//	{
+//		User user=new User();
+//		model.addAttribute("user", user);
+//		return "DangNhap";
+//	}
 	
-	@GetMapping("/signup")
+	@GetMapping("customer/signup")
 	public String getSignUp(Model model)
 	{
 		Customer cus=new Customer();
@@ -64,16 +64,16 @@ public class LoginController {
 	@PostMapping("/login") 
 	public String GetLogin(Model model,@ModelAttribute() User user) 
 	{
-		
-		if(loginService.CheckLogin(user.getUsername(), user.getPassword()))
-		{
-			return "redirect:/";
-		}
-		else
-		{
-			model.addAttribute("Message", "Login failed, there is an error during the login process");
-			return "redirect:/login";
-		}
+		return "redirect:/";
+//		if(loginService.CheckLogin(user.getUsername(), user.getPassword()))
+//		{
+//			return "redirect:/";
+//		}
+//		else
+//		{
+//			model.addAttribute("Message", "Login failed, there is an error during the login process");
+//			return "redirect:/login";
+//		}
 		
 	}
 	@PostMapping("/signup")
@@ -92,7 +92,7 @@ public class LoginController {
 		}
 	}
 	
-	@GetMapping("/loginEmployee")
+	@GetMapping("/employee/loginEmployee")
 	public String GetLoginEmployee(Model model)
 	{
 		User user=new User();
@@ -101,23 +101,22 @@ public class LoginController {
 	
 	}
 	
-	@PostMapping("/loginEmployee")
+	@PostMapping("/employee/loginEmployee")
 	public String Checklogin(Model model,@ModelAttribute() User user)
 	{
-		System.out.println(user.getUsername());
-		System.out.println(user.getPassword());
-		if(loginService.CheckLoginEm(user.getUsername(), user.getPassword()))
-		{
-			System.out.println("Login Pass");
-			return "redirect:/"; 
-			
-		}
-		else
-		{
-			System.out.println("Login Fail");
-			model.addAttribute("Message", "Login failed, there is an error during the login process");
-			return "redirect:/loginEmployee";
-		}
+		return "redirect:/";
+//		if(loginService.CheckLoginEm(user.getUsername(), user.getPassword()))
+//		{
+//			System.out.println("Login Pass");
+//			return "redirect:/"; 
+//			
+//		}
+//		else
+//		{
+//			System.out.println("Login Fail");
+//			model.addAttribute("Message", "Login failed, there is an error during the login process");
+//			return "redirect:/loginEmployee";
+//		}
 		
 	}
 }

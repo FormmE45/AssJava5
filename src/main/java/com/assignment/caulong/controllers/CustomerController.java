@@ -1,5 +1,6 @@
 package com.assignment.caulong.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -23,8 +24,11 @@ public class CustomerController {
 		this.cusRepository = cusRepository;
 	}
 	
-	@GetMapping("/giohang")
-	public String gioHang() {
+	@GetMapping("/customer/giohang")
+	public String gioHang(Principal principal) {
+		if(principal!=null) {
+		System.out.println(principal.getName());
+		}
 		return "giohang";
 	}
 	
@@ -33,16 +37,16 @@ public class CustomerController {
 		return "/thongtincanhan";
 	}
 
-	@GetMapping("/customer/{id}")
-	public String getCustomerById(@PathVariable int id, Model model) {
-		Customer cus = cusRepository.findById(id).orElse(null);
-		if (cus == null) {
-			return "errorNotFound";
-		}
-		System.out.println(cus.getName());
-		model.addAttribute("customer", cus);
-		return "/KhachHang/ChiTietKhachHang";
-	}
+//	@GetMapping("/customer/{id}")
+//	public String getCustomerById(@PathVariable int id, Model model) {
+//		Customer cus = cusRepository.findById(id).orElse(null);
+//		if (cus == null) {
+//			return "errorNotFound";
+//		}
+//		System.out.println(cus.getName());
+//		model.addAttribute("customer", cus);
+//		return "/KhachHang/ChiTietKhachHang";
+//	}
 
 	@GetMapping("/customers")
 	public String getAllCustomer(Model model) {
@@ -63,8 +67,7 @@ public class CustomerController {
 		return "/KhachHang/ChiTietKhachHang";
 	}
 
-	
-	@GetMapping("/customer/Login")
+	@GetMapping("customer/login")
 	public String Login(Model model)
 	{
 		Customer cus=new Customer();
@@ -72,11 +75,9 @@ public class CustomerController {
 		return "DangNhap";
 	}
 
-	@PostMapping("/customer/Login")
-	public String PostLogin(Model model) {
-		Customer cus = new Customer();
-		model.addAttribute("user", cus);
-		return "DangNhap";
+	@PostMapping("/customer/login")
+	public String PostLogin() {
+		return "redirect:/";
 	}
 
 }

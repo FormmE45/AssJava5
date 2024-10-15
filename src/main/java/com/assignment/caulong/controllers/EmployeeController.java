@@ -43,7 +43,7 @@ public class EmployeeController {
 		Page<Employee> employeeList = empService.findSearch(page);
 		model.addAttribute("nhanViens", employeeList);
 		model.addAttribute("currentPage", page);
-		return "/nhanvien/quanlynhanvien";
+		return "nhanvien/quanlynhanvien";
 	}
 
 	@GetMapping("/employeeManager/{id}")
