@@ -27,7 +27,7 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain filterChainEmployee(HttpSecurity http) throws Exception{
-		return http.csrf(csrf->csrf.disable()).authenticationProvider(authenticationProviderEmployee())
+		return http.csrf(csrf->csrf.disable()).securityMatcher("/employee/**").authenticationProvider(authenticationProviderEmployee())
 				.authorizeHttpRequests(
 						authReq->{
 									authReq.requestMatchers("/","/error","/favicon.ico","/views/**").permitAll();
@@ -45,7 +45,7 @@ public class SecurityConfig {
 	}
 	@Bean
 	public SecurityFilterChain filterChainUser(HttpSecurity http) throws Exception{
-		return http.csrf(csrf->csrf.disable()).authenticationProvider(authenticationProviderUser())
+		return http.csrf(csrf->csrf.disable()).securityMatcher("/customer/**").authenticationProvider(authenticationProviderUser())
 				.authorizeHttpRequests(
 						authReq->{
 									authReq.requestMatchers("/","/error","/favicon.ico","/views/**").permitAll();

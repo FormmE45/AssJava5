@@ -21,7 +21,7 @@ public class EmployeePrincipal implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> permisson=new ArrayList<>();
-		permisson.add(new SimpleGrantedAuthority("EMPLOYEE"));
+		permisson.add(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
 		return permisson;
 	}
 
