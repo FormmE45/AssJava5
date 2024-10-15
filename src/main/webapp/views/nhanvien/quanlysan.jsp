@@ -144,22 +144,43 @@
                 <div class="row">
                     <div class="col-4">
                         <!-- Ảnh sân -->
-                        <div class="row">
-                            <div class="col-8 ps-0">
-                                <img src="https://media.architecturaldigest.com/photos/60d5eb352990a3040500dc40/16:9/w_5455,h_3068,c_limit/Waterfalling%20Estate%2006-30-2020%20002.jpg"
-                                    alt="" class="hinhSan">
-                            </div>
-                            <div class="col-4 px-0">
-                                <div class="row mb-2">
-                                    <img src="https://cdn.speedsize.com/360481fb-1d0c-442f-ad69-87be324bfa71/https://www.neilson.co.uk/sites/default/files/styles/hub_article_info_block_focal_point_mobile/public/2017-08/grass-court_1_1.jpg?h=f4c57e75&ss_h=dfa52849&itok=70__Q7d9"
-                                        alt="" class="hinhSan">
-                                </div>
-                                <div class="row">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ89aac80RhRN2a0D0WIoIFkURunMcNim7IQw&s"
-                                        alt="" class="hinhSan">
-                                </div>
-                            </div>
-                        </div>
+                        <c:if test="${empty sanChiTiet.badmintonCourtPics}">
+	                        <div class="row">
+	                            <div class="col-8 ps-0">
+	                                <img src="https://media.architecturaldigest.com/photos/60d5eb352990a3040500dc40/16:9/w_5455,h_3068,c_limit/Waterfalling%20Estate%2006-30-2020%20002.jpg"
+	                                    alt="" class="hinhSan">
+	                            </div>
+	                            <div class="col-4 px-0">
+	                                <div class="row mb-2">
+	                                    <img src="https://cdn.speedsize.com/360481fb-1d0c-442f-ad69-87be324bfa71/https://www.neilson.co.uk/sites/default/files/styles/hub_article_info_block_focal_point_mobile/public/2017-08/grass-court_1_1.jpg?h=f4c57e75&ss_h=dfa52849&itok=70__Q7d9"
+	                                        alt="" class="hinhSan">
+	                                </div>
+	                                <div class="row">
+	                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ89aac80RhRN2a0D0WIoIFkURunMcNim7IQw&s"
+	                                        alt="" class="hinhSan">
+	                                </div>
+	                            </div>
+	                        </div>
+                        </c:if>
+                        <c:if test="${not empty sanChiTiet.badmintonCourtPics}">
+						<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+							<div class="carousel-inner">
+							    <c:forEach var="pic" items="${sanChiTiet.badmintonCourtPics}" varStatus="num">
+								    <div class="carousel-item <c:if test="${num.index == 0}">active</c:if>">
+								      	<img src="${pic.linkAnh}" class="d-block w-100" alt="Image">
+								    </div>
+							    </c:forEach>
+						  	</div>
+						  	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+						  		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						    	<span class="visually-hidden">Previous</span>
+						  	</button>
+						  	<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+						    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						    	<span class="visually-hidden">Next</span>
+						  	</button>
+						</div>
+                        </c:if>
                     </div>
                     <div class="col-8 px-5">
                         <!-- maSan tenSan loaiSan giaSan thoiGianSan diaChiSan moTaSan -->
@@ -207,7 +228,7 @@
                             </div>
 			                <div class="d-flex justify-content-end">
 			                    <div class="">
-			                        <a href="/badmintonAdd" class="btn btn-success text-white fw-bold rounded-3">Mới</a>
+			                        <a href="/badmintonAdd" class="btn btn-success text-white fw-bold rounded-3">Thêm mới</a>
 			                        <button class="btn btn-warning text-white fw-bold rounded-3">Cập nhật</button>
 			                    </div>
 			                </div>

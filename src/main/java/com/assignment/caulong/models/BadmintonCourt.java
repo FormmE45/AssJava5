@@ -10,8 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "SanCau")
@@ -21,30 +19,26 @@ public class BadmintonCourt {
 	@Column(name = "MaSan")
 	private int id;
 	@Column(name = "TenSan")
-	@NotEmpty(message = "Tên không được để trống")
 	private String name;
 	@Column(name = "LoaiSan", columnDefinition = "nvarchar")
 	private String type;
 	@Column(name = "GiaSan")
-	@Min(value = 1, message = "Giá phải trên 0")
 	private double price;
 	@Column(name = "MoTa")
-	@NotEmpty(message = "Mô tả không được để trống")
 	private String description;
 	@Column(name = "DiaChi")
-	@NotEmpty(message = "Địa chỉ không được để trống")
 	private String address;
 	@Column(name = "TrangThai")
 	private boolean availability;
 	@OneToMany(mappedBy = "badmintonCourt", cascade = CascadeType.ALL)
 	private List<CourtOrder> courtorders;
-	@OneToMany(mappedBy = "badmintonCourt", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "badmintonCourt", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<BadmintonCourtPic> badmintonCourtPics;
 
 	public BadmintonCourt() {
 		super();
 	}
-	
+
 	public BadmintonCourt(int id, String name, String type, double price, String description, String address,
 			boolean availability) {
 		super();
@@ -55,6 +49,19 @@ public class BadmintonCourt {
 		this.description = description;
 		this.address = address;
 		this.availability = availability;
+	}
+	
+	public BadmintonCourt(int id, String name, String type, double price, String description, String address,
+			boolean availability, List<BadmintonCourtPic> badmintonCourtPics) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.type = type;
+		this.price = price;
+		this.description = description;
+		this.address = address;
+		this.availability = availability;
+		this.badmintonCourtPics = badmintonCourtPics;
 	}
 
 	public int getId() {
@@ -111,6 +118,14 @@ public class BadmintonCourt {
 
 	public void setAvailability(boolean availability) {
 		this.availability = availability;
+	}
+
+	public List<BadmintonCourtPic> getBadmintonCourtPics() {
+		return badmintonCourtPics;
+	}
+
+	public void setBadmintonCourtPics(List<BadmintonCourtPic> badmintonCourtPics) {
+		this.badmintonCourtPics = badmintonCourtPics;
 	}
 	
 }
