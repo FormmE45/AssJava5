@@ -36,4 +36,11 @@ public class ProductController {
 		return "SanPham/ChiTietSanPham";
 	}
 	
+	@GetMapping("/addToCart/{maSanPham}")
+	public String addProductToCart(@PathVariable("maSanPham") String maSanPham,Model model)
+	{
+		
+		return "";
+	}
+	
 }
