@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 
+import io.jsonwebtoken.lang.Objects;
+
 @Service
 public class UploadService {
 
@@ -51,13 +53,27 @@ public class UploadService {
 		return null;
 	}
 	
+	/**
+	 * Lấy url file từ cloud
+	 * 
+	 * @param publicId tên file
+	 * @return url ảnh, null nếu không tìm thấy
+	 */
 	public String getImage(String publicId) {
-		return cloudinary.url().generate(publicId);
+		try {
+			return (String) cloudinary.api().resource(publicId, ObjectUtils.emptyMap()).get("url");
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
 	
-	public void delete(String... publicId) throws Exception {
-		cloudinary.api().deleteResources(Arrays.asList(publicId), ObjectUtils.asMap("type", "upload", "resource_type", "image"));
+	public void delete(String... publicId) {
+		try {
+			cloudinary.api().deleteResources(Arrays.asList(publicId), ObjectUtils.emptyMap());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
