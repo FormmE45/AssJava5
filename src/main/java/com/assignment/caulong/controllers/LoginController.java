@@ -54,13 +54,20 @@ public class LoginController {
 		return "DangKy";
 	}
 	
+	@GetMapping("/productDetail/{id}")
+	public String GetInformation(@PathVariable int id,Model model)
+	{
+		BadmintonCourt sanCau=new BadmintonCourt();
+		//Câu lệnh lấy sân có id tương ứng
+		model.addAttribute("san",sanCau);
+		return "ChiTietSan";
+	}
 	@PostMapping("/login") 
 	public String GetLogin(Model model,@ModelAttribute() User user) 
 	{
 		
 		if(loginService.CheckLogin(user.getUsername(), user.getPassword()))
 		{
-			
 			return "redirect:/";
 		}
 		else
@@ -70,7 +77,6 @@ public class LoginController {
 		}
 		
 	}
-	
 	@PostMapping("/signup")
 	public String GetSignUp(@ModelAttribute Customer customer,Model model)
 	{
