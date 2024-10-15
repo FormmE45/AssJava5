@@ -36,14 +36,7 @@ public class LoginController {
 		this.empService=empService;
 	}
 
-	@GetMapping("/")
-	public String getWebSite(Model model)
-	{
-		List<BadmintonCourt> cacSan=badmintonRepo.findAll();
-		System.out.println("Số lượng: "+cacSan.size());
-		model.addAttribute("cacsancau", cacSan);
-		return "index";
-	}
+	
 	
 	@GetMapping("/login")
 	public String getLogin(Model model)
@@ -69,14 +62,12 @@ public class LoginController {
 		model.addAttribute("san",sanCau);
 		return "ChiTietSan";
 	}
-	
 	@PostMapping("/login") 
 	public String GetLogin(Model model,@ModelAttribute() User user) 
 	{
 		
 		if(loginService.CheckLogin(user.getUsername(), user.getPassword()))
 		{
-			
 			return "redirect:/";
 		}
 		else
@@ -86,7 +77,6 @@ public class LoginController {
 		}
 		
 	}
-	
 	@PostMapping("/signup")
 	public String GetSignUp(@ModelAttribute Customer customer,Model model)
 	{

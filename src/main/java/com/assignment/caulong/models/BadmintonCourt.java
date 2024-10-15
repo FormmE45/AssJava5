@@ -5,12 +5,20 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "SanCau")
 public class BadmintonCourt {
@@ -30,14 +38,10 @@ public class BadmintonCourt {
 	private String address;
 	@Column(name = "TrangThai")
 	private boolean availability;
-	@OneToMany(mappedBy = "badmintonCourt", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "badmintonCourt", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<CourtOrder> courtorders;
 	@OneToMany(mappedBy = "badmintonCourt", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<BadmintonCourtPic> badmintonCourtPics;
-
-	public BadmintonCourt() {
-		super();
-	}
 
 	public BadmintonCourt(int id, String name, String type, double price, String description, String address,
 			boolean availability) {
@@ -61,70 +65,6 @@ public class BadmintonCourt {
 		this.description = description;
 		this.address = address;
 		this.availability = availability;
-		this.badmintonCourtPics = badmintonCourtPics;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public boolean isAvailability() {
-		return availability;
-	}
-
-	public void setAvailability(boolean availability) {
-		this.availability = availability;
-	}
-
-	public List<BadmintonCourtPic> getBadmintonCourtPics() {
-		return badmintonCourtPics;
-	}
-
-	public void setBadmintonCourtPics(List<BadmintonCourtPic> badmintonCourtPics) {
 		this.badmintonCourtPics = badmintonCourtPics;
 	}
 	
