@@ -7,11 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.assignment.caulong.models.Product;
 import com.assignment.caulong.repository.ProductRepository;
 
 @Controller
+@RequestMapping("/employee")
 public class ProductController {
 	
 	@Autowired
@@ -31,7 +33,7 @@ public class ProductController {
 	{
 		Product product=prodRepo.findById(maSanPham).orElse(null);
 		model.addAttribute("product", product);
-		return "/SanPham/ChiTietSanPham";
+		return "SanPham/ChiTietSanPham";
 	}
 	
 }

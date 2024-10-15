@@ -1,7 +1,5 @@
 package com.assignment.caulong.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +16,9 @@ import com.assignment.caulong.service.CustomerService;
 import com.assignment.caulong.service.EmployeeService;
 import com.assignment.caulong.service.LoginService;
 
-
 @Controller
 public class LoginController {
+	
 	private LoginService loginService;
 	private CustomerService cusService;
 	private EmployeeService empService;
@@ -35,8 +33,6 @@ public class LoginController {
 		this.cusService= cusService;
 		this.empService=empService;
 	}
-
-	
 	
 	@GetMapping("/login")
 	public String getLogin(Model model)
@@ -62,6 +58,7 @@ public class LoginController {
 		model.addAttribute("san",sanCau);
 		return "ChiTietSan";
 	}
+	
 	@PostMapping("/login") 
 	public String GetLogin(Model model,@ModelAttribute() User user) 
 	{
@@ -77,6 +74,7 @@ public class LoginController {
 		}
 		
 	}
+	
 	@PostMapping("/signup")
 	public String GetSignUp(@ModelAttribute Customer customer,Model model)
 	{

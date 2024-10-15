@@ -30,7 +30,7 @@ public class CustomerController {
 	
 	@GetMapping("/thongtin")
 	public String thongtin() {
-		return "/thongtincanhan";
+		return "thongtincanhan";
 	}
 
 	@GetMapping("/customer/{id}")
@@ -41,7 +41,7 @@ public class CustomerController {
 		}
 		System.out.println(cus.getName());
 		model.addAttribute("customer", cus);
-		return "/KhachHang/ChiTietKhachHang";
+		return "KhachHang/ChiTietKhachHang";
 	}
 
 	@GetMapping("/customers")
@@ -54,13 +54,13 @@ public class CustomerController {
 	@GetMapping("/customer/edit/{id}")
 	public String initCustomerCreateForm(@PathVariable int id,Model model,@ModelAttribute() Customer customer) {
 		cusRepository.save(customer);
-		return "/KhachHang/ChiTietKhachHang";
+		return "KhachHang/ChiTietKhachHang";
 	}
 
 	@PostMapping("/customer/create")
 	public String createCustomer(@ModelAttribute Customer customer) {
 		cusRepository.save(customer);
-		return "/KhachHang/ChiTietKhachHang";
+		return "KhachHang/ChiTietKhachHang";
 	}
 
 	

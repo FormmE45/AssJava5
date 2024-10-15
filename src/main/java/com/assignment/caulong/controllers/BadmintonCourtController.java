@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,6 +30,7 @@ import com.assignment.caulong.service.UploadService;
 import com.assignment.caulong.util.UrlString;
 
 @Controller
+@RequestMapping("/employee")
 public class BadmintonCourtController {
 
 	private BadmintonCourtRepository courtRepo;
@@ -71,7 +73,7 @@ public class BadmintonCourtController {
 		Page<BadmintonCourt> list = courtService.findAll(searchName, searchType, searchCountry, minPrice, maxPrice, sort, page);
 		model.addAttribute("sans", list);
 		model.addAttribute("currentPage", page);
-		return "/nhanvien/quanlysan";
+		return "nhanvien/quanlysan";
 	}
 	
 	@GetMapping("/badmintonManager/{id}")
@@ -106,13 +108,11 @@ public class BadmintonCourtController {
 		else
 			model.addAttribute("errorNotFound", "Không tìm thấy sân " + id.orElse(-1));
 		
-		System.out.println(court.getBadmintonCourtPics());
-		
 		Page<BadmintonCourt> list = courtService.findAll(searchName, searchType, searchCountry, minPrice, maxPrice, sort, page);
 		model.addAttribute("sanChiTiet", court);
 		model.addAttribute("sans", list);
 		model.addAttribute("currentPage", page);
-		return "/nhanvien/quanlysan";
+		return "nhanvien/quanlysan";
 	}
 	
 	@PostMapping("/badmintonUpdate")
@@ -153,7 +153,7 @@ public class BadmintonCourtController {
 			result.addError(new FieldError("productDTO", "image", "Hình ảnh phải có"));
 		
 		if(result.hasErrors()) {
-			return "/nhanvien/themsan";
+			return "nhanvien/themsan";
 		}
 		
 		BadmintonCourt court = new BadmintonCourt(courtDTO.getId(), courtDTO.getName(), courtDTO.getType(), courtDTO.getPrice(), courtDTO.getDescription(), courtDTO.getAddress(), courtDTO.isAvailability());

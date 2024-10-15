@@ -20,7 +20,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="SanPham")
 public class Product {
-
 	
 	@Id
 	@Column(name="MaSanPham")
