@@ -48,4 +48,42 @@ public class IndexController {
 		return "index";
 	}
 	
+	@RequestMapping("/DanhSachSanTheoTinh")
+	public String LayDanhSachSan(Model model)
+	{
+		
+		List<BadmintonCourt> cacSan=badmintonRepo.findByAddressContaining("Hà Nội");
+		model.addAttribute("cacsancauHaNoi", cacSan);
+		
+		List<BadmintonCourt> cacSanhcm=badmintonRepo.findByAddressContaining("Hồ Chí Minh");
+		model.addAttribute("cacsancauHCM", cacSanhcm);
+		return "DanhSachSan";
+	}
+	
+	@RequestMapping("/DanhSachSanTheoLoaiSan")
+	public String LayDanhSachSanTheoLoai(Model model)
+	{
+		
+//		List<BadmintonCourt> cacSan=badmintonRepo.findByAddressContaining("Hà Nội");
+//		model.addAttribute("cacsancauHaNoi", cacSan);
+//		
+//		List<BadmintonCourt> cacSanhcm=badmintonRepo.findByAddressContaining("Hồ Chí Minh");
+//		model.addAttribute("cacsancauHCM", cacSanhcm);
+		
+		List<BadmintonCourt> cacSanThuong=badmintonRepo.findByTypeContaining("Sân Thường");
+		
+		List<BadmintonCourt> cacSanPhoThong=badmintonRepo.findByTypeContaining("Sân Phổ Thông");
+		
+		List<BadmintonCourt> cacSanCaoCap=badmintonRepo.findByTypeContaining("Sân Cao Cấp");
+		
+		List<BadmintonCourt> cacSanVip=badmintonRepo.findByTypeContaining("Sân VIP");
+		
+		model.addAttribute("cacsancauthuong", cacSanThuong);
+		model.addAttribute("cacsancauphothong", cacSanPhoThong);
+		model.addAttribute("cacsancaucaocap", cacSanCaoCap);
+		model.addAttribute("cacsancauvip", cacSanVip);
+		
+		return "DanhSachSan";
+	}
+	
 }

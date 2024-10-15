@@ -20,4 +20,6 @@ public interface BadmintonCourtRepository extends JpaRepository<BadmintonCourt, 
 	
 	
 	List<BadmintonCourt> findByAddressContaining(String address);
+	
+	List<BadmintonCourt> findByTypeContaining(String type);
 }
