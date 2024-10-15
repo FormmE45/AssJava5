@@ -18,10 +18,12 @@ public class CustomerLoginSuccessHandler extends SimpleUrlAuthenticationSuccessH
 			Authentication authentication) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		SavedRequest savedRequest=requestCache.getRequest(request, response);
+		System.out.println("is Success");
 		if(savedRequest ==null) {
-			super.onAuthenticationSuccess(request, response, authentication);
+			super.onAuthenticationSuccess(request, response, authentication);	
 			return;
 		}
+		System.out.println(savedRequest.getRedirectUrl());
 		String targetUrl=savedRequest.getRedirectUrl();
 		getRedirectStrategy().sendRedirect(request, response, targetUrl);
 	}
