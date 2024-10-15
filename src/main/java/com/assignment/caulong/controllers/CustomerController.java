@@ -34,8 +34,9 @@ public class CustomerController {
 	
 	@GetMapping("/thongtin")
 	public String thongtin() {
-		return "/thongtincanhan";
+		return "thongtincanhan";
 	}
+
 
 //	@GetMapping("/customer/{id}")
 //	public String getCustomerById(@PathVariable int id, Model model) {
@@ -48,6 +49,7 @@ public class CustomerController {
 //		return "/KhachHang/ChiTietKhachHang";
 //	}
 
+
 	@GetMapping("/customers")
 	public String getAllCustomer(Model model) {
 		List<Customer> customers = cusRepository.findAll();
@@ -58,13 +60,13 @@ public class CustomerController {
 	@GetMapping("/customer/edit/{id}")
 	public String initCustomerCreateForm(@PathVariable int id,Model model,@ModelAttribute() Customer customer) {
 		cusRepository.save(customer);
-		return "/KhachHang/ChiTietKhachHang";
+		return "KhachHang/ChiTietKhachHang";
 	}
 
 	@PostMapping("/customer/create")
 	public String createCustomer(@ModelAttribute Customer customer) {
 		cusRepository.save(customer);
-		return "/KhachHang/ChiTietKhachHang";
+		return "KhachHang/ChiTietKhachHang";
 	}
 
 	@GetMapping("customer/login")

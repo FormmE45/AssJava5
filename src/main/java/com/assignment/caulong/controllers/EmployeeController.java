@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.assignment.caulong.models.Employee;
@@ -19,6 +20,7 @@ import com.assignment.caulong.repository.EmployeeRepository;
 import com.assignment.caulong.service.EmployeeService;
 
 @Controller
+@RequestMapping("/employee")
 public class EmployeeController {
 
 	private EmployeeRepository empRepo;
@@ -37,7 +39,7 @@ public class EmployeeController {
 		Employee employee = new Employee();
 		model.addAttribute("employee", employee);
 		if (page < 1) {
-            return "redirect:/employeeManager";
+            return "redirect:/employee/employeeManager";
         }
 		
 		Page<Employee> employeeList = empService.findSearch(page);
@@ -51,7 +53,7 @@ public class EmployeeController {
 			@PathVariable("id") Optional<String> id, 
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page) {
 		if (page < 1) {
-            return "redirect:/employeeManager/" + id.get();
+            return "redirect:/employee/employeeManager/" + id.get();
         }
 		
 		Page<Employee> employeeList = empService.findSearch(page);
@@ -66,7 +68,7 @@ public class EmployeeController {
 		model.addAttribute("nhanViens", employeeList);
 		model.addAttribute("currentPage", page);
 		
-		return "/nhanvien/quanlynhanvien";
+		return "nhanvien/quanlynhanvien";
 	}
 
 	@PostMapping("/employeeUpdate")
@@ -75,7 +77,7 @@ public class EmployeeController {
 		Optional<Employee> found = empRepo.findById(employee.getId());
 		if(found.isPresent())
 			empRepo.save(employee);
-		return "redirect:/employeeManager";
+		return "redirect:/employee/employeeManager";
 	}
 
 	@GetMapping("/employeeRemove/{id}")
@@ -92,7 +94,7 @@ public class EmployeeController {
 		} else {
 			model.addAttribute("message", "Xóa nhân viên thất bại");
 		}
-		return "redirect:/employeeManager";
+		return "redirect:/employee/employeeManager";
 	}
 
 	@GetMapping("/employeeAdd")
@@ -101,25 +103,8 @@ public class EmployeeController {
 
 		model.addAttribute("employee", employee);
 
-		return "/nhanvien/ThemNhanVien";
+		return "nhanvien/ThemNhanVien";
 	}
-
-	
-	@GetMapping("/nhanvien/quanlysan")
-	public String quanlysan() {
-		return "/nhanvien/quanlysan";
-	}
-	
-	@GetMapping("/nhanvien/quanlydatsan")
-	public String quanlydatsan() {
-		return "/nhanvien/quanlydatsan";
-	}
-	
-	@GetMapping("/nhanvien/quanlynhanvien")
-	public String quanlynhanvien() {
-		return "/nhanvien/quanlynhanvien";
-	}
-
 
 	@PostMapping("/employeeAdd")
 	public String saveEmployee(Model model, 
@@ -131,7 +116,7 @@ public class EmployeeController {
 		
 		empRepo.save(employee);
 		
-		return "redirect:/employeeManager";
+		return "redirect:/employee/employeeManager";
 	}
 
 }

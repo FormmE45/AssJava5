@@ -12,182 +12,147 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-	crossorigin="anonymous">
-<title>Quản lý nhân viên</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+<title>Quản lý đặt sân</title>
 <style type="text/css">
-.btn-warning.text-white:hover {
-	background-color: #eeb60e;
-}
-/* Center icon in button */
-.btn-icon {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 40px;
-	height: 40px;
+body {
+	background-color: #f8f9fa;
 }
 
-/* Center icon in circle button */
-.btn-icon-circle {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
+.sidebar {
+	background: linear-gradient(135deg, #343a40, #007bff);
+	/* Gradient chuyển màu */
+	padding: 20px 12px 20px 12px;
+	min-height: 100vh;
+	transition: all 0.4s ease; /* Hiệu ứng chuyển động nhẹ */
 }
 
-/* Sticky header of table */
-table.table-sticky thead tr:nth-child(1) th {
-	position: sticky;
+.sidebar-title {
+	color: #fff;
+	margin-bottom: 30px;
+	font-size: 1.5rem;
+	font-weight: bold;
+	letter-spacing: 2px; /* Giãn khoảng cách giữa các chữ */
+	text-align: center;
+}
+
+.nav-link {
+	color: #adb5bd;
+	font-size: 1.1rem;
+	padding: 12px 20px;
+	transition: all 0.4s ease;
+	position: relative;
+	overflow: hidden; /* Để hiệu ứng tràn ra ngoài */
+	display: flex;
+	align-items: center;
+	z-index: 1;
+}
+
+.nav-link i {
+	font-size: 1.2rem;
+	margin-right: 10px;
+	transition: transform 0.4s ease; /* Hiệu ứng xoay icon */
+}
+
+.nav-link:before {
+	content: '';
+	position: absolute;
 	top: 0;
-	z-index: 10;
-}
-
-/* Showing badminton court */
-img.hinhSan {
-	max-width: none;
-	max-height: none;
-	object-fit: cover;
+	left: -100%;
 	width: 100%;
 	height: 100%;
+	background-color: rgba(255, 255, 255, 0.1);
+	z-index: 0;
+	transition: all 0.4s ease;
 }
 
-/* Text and line */
-.text-line {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+.nav-link:not(.active):hover:before {
+	left: 0; /* Tạo hiệu ứng tràn từ trái sang phải */
 }
 
-.text-line>:first-child {
-	flex-grow: 0;
+.nav-link:not(.active):hover {
+	background: none;
 }
 
-.text-line>:nth-child(2) {
-	flex-grow: 1;
+.nav-link:hover i {
+	transform: rotate(20deg); /* Hiệu ứng xoay nhẹ biểu tượng */
 }
 
-.divider {
-	height: 0.8px;
-	background-color: black;
-	opacity: .25;
+.nav-link.active {
+	color: #fff;
+	background-color: #007bff;
+	border-radius: 10px;
+}
+
+.nav-item {
+	margin-bottom: 15px;
+}
+
+.sidebar-sticky {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
 }
 </style>
 </head>
 
 <body>
-	<div class="row w-100 h-100 min-vh-100">
-		<div class="col-2 sticky-top">
-			<div class="d-flex flex-column flex-shrink-0 p-3 w-100 h-100"
-				style="background-color: #A3D3DF;">
-				<a href="/"
-					class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-					<svg class="bi pe-none me-2" width="40" height="32">
-                        <use xlink:href="#bootstrap"></use>
-                    </svg> <span class="fs-4">Java 5</span>
-				</a>
-				<hr>
-				<ul class="nav nav-pills flex-column mb-auto">
-					<li class="nav-item" style="height: 40px;">
-						<a href="#" class="nav-link link-body-emphasis" aria-current="page">
-							<div class="row">
-								<div
-									class="col-2 d-flex justify-content-center align-items-center">
-									<i class="fa-solid fa-house"></i>
-								</div>
-								<div class="col-10 pe-0">Trang chủ</div>
-							</div>
-						</a>
-					</li>
-					<li class="nav-item" style="height: 40px;">
-						<a href="/badmintonManager" class="nav-link link-body-emphasis">
-							<div class="row">
-								<div
-									class="col-2 d-flex justify-content-center align-items-center">
-									<i class="fa-regular fa-clipboard"></i>
-								</div>
-								<div class="col-10 pe-0">Quản lý sân</div>
-							</div>
-						</a>
-					</li>
-					<li class="nav-item" style="height: 40px;">
-						<a href="/courtOrderManager" class="nav-link active">
-							<div class="row">
-								<div class="col-2 d-flex justify-content-center align-items-center">
-									<i class="fa-solid fa-chalkboard"></i>
-								</div>
-								<div class="col-10 pe-0">Quản lý đặt sân</div>
-							</div>
-						</a>
-					</li>
-					<li class="nav-item" style="height: 40px;">
-						<a href="#" class="nav-link link-body-emphasis">
-							<div class="row">
-								<div class="col-2 d-flex justify-content-center align-items-center">
-									<i class="fa-solid fa-ticket"></i>
-								</div>
-								<div class="col-10 pe-0">Quản lý ưu đãi</div>
-							</div>
-						</a>
-					</li>
-					<li class="nav-item" style="height: 40px;">
-						<a href="/employeeManager" class="nav-link link-body-emphasis">
-							<div class="row">
-								<div class="col-2 d-flex justify-content-center align-items-center">
-									<i class="fa-solid fa-users"></i>
-								</div>
-								<div class="col-10 pe-0">Quản lý nhân viên</div>
-							</div>
-						</a>
-					</li>
-					<li class="nav-item" style="height: 40px;">
-						<a href="/customerManager" class="nav-link link-body-emphasis">
-							<div class="row">
-								<div class="col-2 d-flex justify-content-center align-items-center">
-									<i class="fa-solid fa-id-card"></i>
-								</div>
-								<div class="col-10 pe-0">Quản lý khách hàng</div>
-							</div>
-						</a>
-					</li>
-				</ul>
-				<hr>
-				<div class="dropup">
-					<a href="#"
-						class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
-						data-bs-toggle="dropdown" aria-expanded="false"> <img
-						src="https://github.com/mdo.png" alt="" width="32" height="32"
-						class="rounded-circle me-2"> <strong>ABC</strong>
-					</a>
-					<ul class="dropdown-menu text-small shadow">
-						<!-- <li><a class="dropdown-item" href="#">New project...</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li> -->
-						<li><a class="dropdown-item" href="#">Thoát</a></li>
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Sidebar -->
+			<nav class="col-md-2 sidebar d-none d-md-block">
+				<div class="sidebar-sticky">
+					<h4 class="sidebar-title">Java5 - Nhóm 7</h4>
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link text-white" href="/employee/index">
+								<i class="bi bi-house-door"></i> Trang chủ
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-white" href="/employee/badmintonManager"> 
+								<i class="bi bi-building"></i> Quản lý sân
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" href="/employee/courtOrderManager"> 
+								<i class="bi bi-book"></i> Quản lý đặt sân
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-white" href="/employee/customerManager"> 
+								<i class="bi bi-gift"></i> Quản lý khách hàng
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-white" href="/employee/employeeManager"> 
+								<i class="bi bi-person"></i> Quản lý nhân viên
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-white" href="/employee/report"> 
+								<i class="bi bi-bar-chart"></i> Báo cáo thống kê
+							</a>
+						</li>
 					</ul>
 				</div>
-			</div>
-		</div>
-		<div class="col-10 py-3">
-			<h3 class="ms-5">Quản lý đặt sân</h3>
+			</nav>
+		<div class="col-md-10 ms-sm-auto col-lg-10 px-4 w-80">
+			<h1 class="mt-4">Quản lý đặt sân</h1>
 			<hr>
 			<!-- Tìm kiếm -->
 			<div class="row px-5 my-3">
-				<form action="/courtOrderManager" onsubmit="disableEmptyInputs(this)" id="searchForm">
+					<h3>Tìm kiếm</h3>
+				<form action="/employee/courtOrderManager" onsubmit="disableEmptyInputs(this)" id="searchForm">
 					<div class="row mb-2">
 						<div class="col-6">
 							<div class="row">
 								<label for="searchCustomer"
-									class="col-2 col-form-label fw-bold py-0" style="font-size: 13px">Tìm tên người đặt</label>
-								<div class="col-10">
+									class="col-3 col-form-label fw-bold py-0">Tên người đặt</label>
+								<div class="col-9">
 									<input type="text" class="form-control"
 										name="searchCustomer" value="${searchCustomer}" />
 								</div>
@@ -196,7 +161,7 @@ img.hinhSan {
 						<div class="col-6">
 							<div class="row">
 								<label for="searchCourt"
-									class="col-2 col-form-label fw-bold">Tìm sân</label>
+									class="col-2 col-form-label fw-bold">Sân</label>
 								<div class="col-10">
 									<input type="text" class="form-control"
 										name="searchCourt" value="${searchCourt}" />
@@ -207,8 +172,8 @@ img.hinhSan {
 					<div class="row mb-3">
 						<div class="col-6">
 							<div class="row">
-								<label for="status" class="col-2 col-form-label fw-bold" style="font-size: 15px">Tình trạng</label>
-								<div class="col-10">
+								<label for="status" class="col-3 col-form-label fw-bold" style="font-size: 15px">Tình trạng</label>
+								<div class="col-9">
 									<select class="form-select" aria-label="Type" name="status">
 										<option value="tatca">Tất cả</option>
 										<c:forEach var="tinhTrangItem" items="${tinhTrang}">
@@ -281,16 +246,15 @@ img.hinhSan {
 							<button class="w-100 btn btn-success">Search</button>
 						</div>
 						<div class="">
-							<a href="/courtOrderManager" class="w-100 btn btn-primary">Clear</a>
+							<a href="/employee/courtOrderManager" class="w-100 btn btn-danger">Clear</a>
 						</div>
 					</div>
 				</form>
 			</div>
 			<hr>
 			<!-- Danh sách -->
-			<div class="px-5 overflow-auto table-responsive"
-				style="height: 564px; scrollbar-width: thin;">
-				<table class="table align-middle mb-0 bg-white table-sticky">
+			<div class="px-5">
+				<table class="table align-middle mb-0 bg-white mb-3">
 					<thead class="bg-light">
 						<tr>
 							<th>Mã đặt sân</th>
@@ -304,7 +268,7 @@ img.hinhSan {
 					</thead>
 					<tbody>
 						<c:forEach var="courtOrderItem" items="${courtOrders.content}">
-							<tr onclick="window.location='/courtOrderManager/${courtOrderItem.id}';" style="cursor: pointer;">
+							<tr onclick="window.location='/employee/courtOrderManager/${courtOrderItem.id}';" style="cursor: pointer;">
 								<td>${courtOrderItem.id}</td>
 								<td>${courtOrderItem.customer.name}</td>
 								<td>${courtOrderItem.badmintoncourt.name}</td>
@@ -323,10 +287,10 @@ img.hinhSan {
 									</c:if>
 								</td>
 								<td>
-									<a href="/courtOrderManager/${courtOrderItem.id}" class="btn btn-primary border-0 btn-sm">
+									<a href="/employee/courtOrderManager/${courtOrderItem.id}" class="btn btn-primary border-0 btn-sm">
 										<i class="fa-solid fa-eye"></i>
 									</a>
-									<a href="/courtOrderChecked/${courtOrderItem.id}" onclick="return confirm('Are you sure?') ? true : false;"
+									<a href="/employee/courtOrderChecked/${courtOrderItem.id}" onclick="return confirm('Are you sure?') ? true : false;"
 										class="btn
 										<c:choose>
 											<c:when test="${courtOrderItem.status == 'Đã thanh toán'}">
@@ -348,7 +312,7 @@ img.hinhSan {
 	            <c:set var="startPage" value="${currentPage - delta < 1 ? 1 : currentPage - delta}" />
 	            <c:set var="endPage" value="${currentPage + delta > courtOrders.totalPages ? courtOrders.totalPages : currentPage + delta}" />
 				<c:if test="${courtOrders.totalPages > 1}">
-		            <nav aria-label="Phân Trang" class="mt-3">
+		            <nav aria-label="Phân Trang" class="mb-3">
 		                <ul class="pagination justify-content-end">
 		                    <li class="page-item <c:if test='${courtOrders.first}'>disabled</c:if>">
 		                        <a class="page-link" href="${urlString}&page=${courtOrders.first ? 1 : currentPage - 1}">Trước</a>
@@ -387,10 +351,8 @@ img.hinhSan {
 			</div>
 		</div>
 	</div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous"></script>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

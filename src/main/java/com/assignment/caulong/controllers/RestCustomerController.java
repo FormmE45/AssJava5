@@ -12,18 +12,18 @@ import com.assignment.caulong.repository.CustomerRepository;
 
 @RestController
 public class RestCustomerController {
-		private final CustomerRepository cusRepository;
-	
-		public RestCustomerController(CustomerRepository cusRepository) {
-			super();
-			this.cusRepository = cusRepository;
+	private final CustomerRepository cusRepository;
+
+	public RestCustomerController(CustomerRepository cusRepository) {
+		super();
+		this.cusRepository = cusRepository;
+	}
+	@GetMapping("customer/{id}/orders")
+	public List<CourtOrder> getOrders(@PathVariable Integer id){
+		Customer cus= cusRepository.findById(id).orElse(null);
+		if(cus==null) {
+			return null;
 		}
-		@GetMapping("customer/{id}/orders")
-		public List<CourtOrder> getOrders(@PathVariable Integer id){
-			Customer cus= cusRepository.findById(id).orElse(null);
-			if(cus==null) {
-				return null;
-			}
-			return cus.getOrders();
-		}
+		return cus.getOrders();
+	}
 }

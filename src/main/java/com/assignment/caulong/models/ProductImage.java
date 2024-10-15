@@ -1,14 +1,10 @@
 package com.assignment.caulong.models;
 
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,15 +17,15 @@ import lombok.NoArgsConstructor;
 @Table(name="HinhSanPham")
 public class ProductImage {
 
-		@Id
-		@Column(name="MaSanPham")
-		private String maSanPham;
-		
-		@Column(name="DuongDanHinh")
-		private String duongDanHinh;
-		
-		@ManyToOne
-		@JoinColumn(name="MaSanPham", referencedColumnName = "MaSanPham",insertable=false, updatable=false)
-		private Product prouduct;
+	@Id
+	@Column(name="MaSanPham")
+	private String maSanPham;
+	
+	@Column(name="DuongDanHinh")
+	private String duongDanHinh;
+	
+	@ManyToOne
+	@JoinColumn(name="MaSanPham", referencedColumnName="MaSanPham", insertable=false, updatable=false)
+	private Product prouduct;
 		
 }

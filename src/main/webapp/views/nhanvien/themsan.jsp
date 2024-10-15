@@ -18,7 +18,7 @@
 	<div class="container mt-5 w-50">
 		<h2>Thêm thông tin sân</h2>
 
-		<form:form action="/badmintonAdd" method="post" modelAttribute="court">
+		<form:form action="/badmintonAdd" method="post" modelAttribute="court" enctype="multipart/form-data">
 			<div class="mb-3">
 				<label for="name" class="form-label">Tên sân</label>
 				<form:input path="name" class="form-control" />
@@ -63,6 +63,12 @@
 					</div>
 				</div>
 				<form:errors path="availability" class="text-danger" />
+			</div>
+	
+			<div class="mb-3">
+				<label for="images" class="form-label col-4">Hình ảnh</label>
+				<form:input path="images" class="form-control" type="file" multiple="true" />
+				<form:errors path="images" class="text-danger" />
 			</div>
 
 			<button type="submit" class="btn btn-primary">Thêm sân</button>

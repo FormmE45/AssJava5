@@ -2,6 +2,7 @@ package com.assignment.caulong.models;
 
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -12,7 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -20,16 +21,15 @@ import lombok.Data;
 @Entity
 @Table(name = "DatSanCau")
 public class CourtOrder {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="MaDatSan")
 	private int id;
-	
 	@ManyToOne
 	@JoinColumn(name="MaKhachHang")
 	@JsonIgnore
 	private Customer customer;
-	
 	@ManyToOne
 	@JoinColumn(name="MaSan")
 	private BadmintonCourt badmintonCourt;
@@ -41,13 +41,11 @@ public class CourtOrder {
 	private Time end;
 	@Column(name="TrangThaiDat")
 	private String status;
-	
-	
-	
+	@OneToMany(mappedBy = "courtOrder")
+    private List<CourtReceipt> courtReceipt;
 	
 	public CourtOrder() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public CourtOrder(int id, Customer customer, BadmintonCourt badmintoncourt, Date date, Time start,
@@ -61,7 +59,6 @@ public class CourtOrder {
 		this.end = end;
 		this.status = status;
 	}
-
 
 	public int getId() {
 		return id;

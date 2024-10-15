@@ -15,6 +15,7 @@ import com.assignment.caulong.service.BadmintonEmployeeUserDetailService;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
 	private BadmintonCustomUserDetailService badmintonCustomUserDetailService;
 	private BadmintonEmployeeUserDetailService badmintonEmployeeUserDetailService;
 	
@@ -32,6 +33,7 @@ public class SecurityConfig {
 									authReq.requestMatchers("/","/error","/favicon.ico","/views/**").permitAll();
 									authReq.requestMatchers("/employee/**").hasRole("EMPLOYEE");
 									authReq.anyRequest().authenticated();
+
 						})
 				.formLogin(l->{
 					l.loginPage("/employee/loginEmployee").permitAll();
@@ -47,7 +49,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests(
 						authReq->{
 									authReq.requestMatchers("/","/error","/favicon.ico","/views/**").permitAll();
-									authReq.requestMatchers("/customer/**").hasRole("CSUTOMER");
+									authReq.requestMatchers("/customer/**").hasRole("CUSTOMER");
 									authReq.anyRequest().authenticated();
 						})
 				.formLogin(l->{
