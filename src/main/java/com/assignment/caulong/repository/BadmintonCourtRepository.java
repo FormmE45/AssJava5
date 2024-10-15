@@ -1,5 +1,7 @@
 package com.assignment.caulong.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +18,6 @@ public interface BadmintonCourtRepository extends JpaRepository<BadmintonCourt, 
 			+ "and bc.price between :min and :max")
 	Page<BadmintonCourt> findSearch(String searchName, String searchType, String searchCountry, int min, int max, Pageable pageable);
 	
+	
+	List<BadmintonCourt> findByAddressContaining(String address);
 }

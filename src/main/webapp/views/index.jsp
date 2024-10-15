@@ -103,7 +103,7 @@ nav .nav-link:hover {
 						trận đấu hấp dẫn cùng bạn bè!</h2>
 				</div>
 				<div class="col-12 d-flex justify-content-center">
-					<form action="" class="row bg-secondary-subtle rounded-4 px-2 py-3"
+					<form action="/SortByAddress" method="post"  class="row bg-secondary-subtle rounded-4 px-2 py-3"
 						style="width: 40%;">
 						<div class="col-5 d-flex flex-column">
 							<label for="timKhuVuc" class="form-label text-start ps-1 mb-1">
@@ -224,7 +224,7 @@ nav .nav-link:hover {
                             </p>
                             <div class="d-flex justify-content-evenly">
                                 <a href="datNgay/${sancau.id}" class="btn btn-outline-danger">Đặt ngay</a>
-                                <a href="chiTiet/${sancau.id}" class="btn btn-danger">Xem chi tiết</a>
+                                <a href="/badmintonDetail/${sancau.id}" class="btn btn-danger">Xem chi tiết</a>
                             </div>
                         </div>
                     </div>
