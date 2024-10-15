@@ -13,7 +13,6 @@ import com.assignment.caulong.models.Product;
 import com.assignment.caulong.repository.ProductRepository;
 
 @Controller
-@RequestMapping("/employee")
 public class ProductController {
 	
 	@Autowired

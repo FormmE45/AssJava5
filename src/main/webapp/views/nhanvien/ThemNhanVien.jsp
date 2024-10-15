@@ -18,7 +18,7 @@
 	<div class="container mt-5 w-50">
 		<h2>Thêm thông tin nhân viên</h2>
 
-		<form:form modelAttribute="employee" action="/employeeAdd" method="post">
+		<form:form modelAttribute="employee" action="/employee/employeeAdd" method="post">
 			<div class="mb-3">
 				<label for="id" class="form-label">Mã Nhân Viên</label>
 				<form:input path="id" class="form-control" id="id" />

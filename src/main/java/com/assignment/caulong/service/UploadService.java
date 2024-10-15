@@ -19,7 +19,11 @@ public class UploadService {
 
 	public String uploadFileToCloudinary(File file) {
 		try {
-			Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.asMap("resource_type", "image"));
+			String fileName = file.getName();
+	        int lastIndex = fileName.lastIndexOf('.');
+	        fileName = lastIndex == -1 ? fileName : fileName.substring(0, lastIndex);
+	        
+			Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.asMap("resource_type", "image", "public_id", fileName));
 
 			return (String) uploadResult.get("url");
 		} catch (Exception e) {

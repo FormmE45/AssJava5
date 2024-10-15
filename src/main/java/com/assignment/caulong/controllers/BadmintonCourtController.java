@@ -99,7 +99,7 @@ public class BadmintonCourtController {
 		
 		model.addAttribute("sanChiTiet", new BadmintonCourt());
 		if (page < 1)
-            return "redirect:/badmintonManager/" + id.get() + urlString;
+            return "redirect:/employee/badmintonManager/" + id.get() + urlString;
 		
 		Optional<BadmintonCourt> found = courtRepo.findById(id.orElse(-1));
 		BadmintonCourt court = new BadmintonCourt();
@@ -121,7 +121,7 @@ public class BadmintonCourtController {
 		Optional<BadmintonCourt> found = courtRepo.findById(court.getId());
 		if(found.isPresent())
 			courtRepo.save(court);
-		return "redirect:/badmintonManager";
+		return "redirect:/employee/badmintonManager";
 	}
 	
 	@GetMapping("/badmintonRemove/{id}")
@@ -137,14 +137,14 @@ public class BadmintonCourtController {
 		} else {
 			model.addAttribute("message", "Xóa sân thất bại");
 		}
-		return "redirect:/badmintonManager";
+		return "redirect:/employee/badmintonManager";
 	}
 	
 	@GetMapping("/badmintonAdd")
 	public String addBadminton(Model model) {
 		BadmintonCourtDTO court = new BadmintonCourtDTO();
 		model.addAttribute("court", court);
-		return "/nhanvien/themsan";
+		return "nhanvien/themsan";
 	}
 	
 	@PostMapping("/badmintonAdd")
@@ -169,7 +169,7 @@ public class BadmintonCourtController {
 		court.setBadmintonCourtPics(pics);
 		courtRepo.save(court);
 		
-		return "redirect:/badmintonManager";
+		return "redirect:/employee/badmintonManager";
 	}
 	
 	@ModelAttribute("loaiSan")

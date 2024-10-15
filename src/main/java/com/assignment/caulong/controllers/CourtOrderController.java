@@ -48,7 +48,7 @@ public class CourtOrderController {
 		model.addAttribute("urlString", urlString);
 		
 		if (page < 1)
-            return "redirect:/courtOrderManager" + urlString;
+            return "redirect:/employee/courtOrderManager" + urlString;
 		
 		Page<CourtOrder> list = courtOrderService.findAll(searchCustomer, searchCourt, status, minTime, maxTime, page);
 		System.out.println(list.getTotalPages());
@@ -72,7 +72,7 @@ public class CourtOrderController {
 			@PathVariable("id") int id) { 
 		CourtOrder courtOrder = courtOrderRepo.findById(id).orElse(null);
 		if(courtOrder == null)
-			return "redirect:/courtOrderManager";
+			return "redirect:/employee/courtOrderManager";
 		courtOrder.setStatus("Đã thanh toán");
 		courtOrderRepo.save(courtOrder);
 		return "nhanvien/quanlydatsan";

@@ -51,7 +51,7 @@ public class CustomerManagerController {
 		
 		model.addAttribute("customer", new Customer());
 		if (page < 1)
-            return "redirect:/customerManager";
+            return "redirect:/employee/customerManager";
 		
 		Page<Customer> list = service.findSearch(searchName, searchPhone, searchAddress, page);
 		model.addAttribute("customers", list);
@@ -73,7 +73,7 @@ public class CustomerManagerController {
 		String urlString = UrlString.param(model, params);
 		model.addAttribute("urlString", urlString);
 		if (page < 1)
-            return "redirect:/customerManager/" + id.get();
+            return "redirect:/employee/customerManager/" + id.get();
 
 		Page<Customer> list = service.findSearch(searchName, searchPhone, searchAddress, page);
 		Optional<Customer> customerFound = repo.findById(id.orElse(-1));
@@ -95,7 +95,7 @@ public class CustomerManagerController {
 		Optional<Customer> found = repo.findById(customer.getId());
 		if(found.isPresent())
 			repo.save(customer);
-		return "redirect:/customerManager";
+		return "redirect:/employee/customerManager";
 	}
 
 	@GetMapping("/customerRemove/{id}")
@@ -112,7 +112,7 @@ public class CustomerManagerController {
 		} else {
 			model.addAttribute("message", "Xóa khách hàng thất bại");
 		}
-		return "redirect:/customerManager";
+		return "redirect:/employee/customerManager";
 	}
 
 }

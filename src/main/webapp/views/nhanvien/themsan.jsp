@@ -18,7 +18,7 @@
 	<div class="container mt-5 w-50">
 		<h2>Thêm thông tin sân</h2>
 
-		<form:form action="/badmintonAdd" method="post" modelAttribute="court" enctype="multipart/form-data">
+		<form:form action="/employee/badmintonAdd" method="post" modelAttribute="court" enctype="multipart/form-data">
 			<div class="mb-3">
 				<label for="name" class="form-label">Tên sân</label>
 				<form:input path="name" class="form-control" />
