@@ -36,6 +36,5 @@ public class Product {
     private String moTa;
     @OneToMany(mappedBy = "prouduct", cascade = CascadeType.ALL)
     private List<ProductImage> productImages;
-
    
 }

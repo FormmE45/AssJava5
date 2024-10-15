@@ -28,7 +28,6 @@ public class LoginController {
 	@Autowired
 	BadmintonCourtRepository badmintonRepo;
 	
-	@Autowired
 	public LoginController(LoginService loginService,CustomerService cusService,EmployeeService empService) {
 		super();
 		this.loginService = loginService;

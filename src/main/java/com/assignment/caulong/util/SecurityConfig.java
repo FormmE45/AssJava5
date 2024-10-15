@@ -29,10 +29,11 @@ public class SecurityConfig {
 				.authorizeHttpRequests(
 						authReq->{
 									authReq.requestMatchers("/","/error","/favicon.ico","/views/**").permitAll();
+									authReq.requestMatchers("/login").permitAll();
 									authReq.anyRequest().authenticated();
 						})
 				.formLogin(l->{
-					l.loginPage("/login");
+					l.loginPage("/login").permitAll();
 					l.successHandler(new CustomerLoginSuccessHandler());
 					l.defaultSuccessUrl("/");
 				})
