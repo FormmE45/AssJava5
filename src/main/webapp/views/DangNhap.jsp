@@ -27,7 +27,7 @@
                 <h4 class="text-center mb-4">Đăng nhập</h4>
 
                 <!-- Sử dụng Spring form với modelAttribute 'loginForm' -->
-                <form:form action="/login" method="post" modelAttribute="user">
+                <form:form action="${pageContext.request.contextPath}/customer/login" method="post" modelAttribute="user">
                     <div class="row mb-4">
                         <label for="username" class="col-3 col-form-label fw-bold">Username</label>
                         <div class="col-9">

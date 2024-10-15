@@ -20,7 +20,6 @@ public class UploadService {
 	public String uploadFileToCloudinary(File file) {
 		try {
 			Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.asMap("resource_type", "image"));
-
 			return (String) uploadResult.get("url");
 		} catch (Exception e) {
 			e.printStackTrace();
