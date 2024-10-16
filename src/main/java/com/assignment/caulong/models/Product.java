@@ -20,7 +20,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="SanPham")
 public class Product {
-
 	
 	@Id
 	@Column(name="MaSanPham")
@@ -36,6 +35,5 @@ public class Product {
     private String moTa;
     @OneToMany(mappedBy = "prouduct", cascade = CascadeType.ALL)
     private List<ProductImage> productImages;
-
    
 }

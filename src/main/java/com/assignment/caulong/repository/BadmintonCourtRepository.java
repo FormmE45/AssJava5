@@ -17,9 +17,10 @@ public interface BadmintonCourtRepository extends JpaRepository<BadmintonCourt, 
 			+ "and bc.address like coalesce(:searchCountry, bc.address) "
 			+ "and bc.price between :min and :max")
 	Page<BadmintonCourt> findSearch(String searchName, String searchType, String searchCountry, int min, int max, Pageable pageable);
-	
-	
+	List<BadmintonCourt> findByPriceIsNull();
+	List<BadmintonCourt> findByPriceBetween(double min, double max);
+	List<BadmintonCourt> findByPrice(double price);
 	List<BadmintonCourt> findByAddressContaining(String address);
-	
 	List<BadmintonCourt> findByTypeContaining(String type);
+	
 }

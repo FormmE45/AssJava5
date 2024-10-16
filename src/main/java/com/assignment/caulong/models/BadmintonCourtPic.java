@@ -2,6 +2,8 @@ package com.assignment.caulong.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -16,16 +18,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BadmintonCourtPic {
-	
+
 	@Id
-	@Column(name="MaSan")
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "MaAnhSan")
+	private int id;
 	
-	@Id
 	@Column(name="LinkAnh")
 	private String linkAnh;
 	
 	@ManyToOne
-	@JoinColumn(name="MaSan", referencedColumnName = "MaSan")
+	@JoinColumn(name="MaSan")
 	private BadmintonCourt badmintonCourt;
+
+	public BadmintonCourtPic(String linkAnh, BadmintonCourt badmintonCourt) {
+		super();
+		this.linkAnh = linkAnh;
+		this.badmintonCourt = badmintonCourt;
+	}
+	
 }

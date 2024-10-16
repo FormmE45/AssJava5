@@ -1,6 +1,8 @@
 package com.assignment.caulong.controllers;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -9,32 +11,41 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.assignment.caulong.models.BadmintonCourt;
-import com.assignment.caulong.models.Employee;
+import com.assignment.caulong.models.BadmintonCourtDTO;
+import com.assignment.caulong.models.BadmintonCourtPic;
 import com.assignment.caulong.repository.BadmintonCourtRepository;
 import com.assignment.caulong.service.BadmintonCourtService;
+import com.assignment.caulong.service.UploadService;
 import com.assignment.caulong.util.UrlString;
 
 @Controller
+@RequestMapping("/employee")
 public class BadmintonCourtController {
 
 	private BadmintonCourtRepository courtRepo;
 	private BadmintonCourtService courtService;
+	private UploadService uploadService;
 
 	@Autowired
-	public BadmintonCourtController(BadmintonCourtRepository courtRepo, BadmintonCourtService courtService) {
+	public BadmintonCourtController(BadmintonCourtRepository courtRepo,
+			BadmintonCourtService courtService, UploadService uploadService) {
 		super();
 		this.courtRepo = courtRepo;
 		this.courtService = courtService;
+		this.uploadService = uploadService;
 	}
-	
+
 	@GetMapping("/badmintonManager")
 	public String badmintoncourt(Model model, 
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
@@ -62,7 +73,7 @@ public class BadmintonCourtController {
 		Page<BadmintonCourt> list = courtService.findAll(searchName, searchType, searchCountry, minPrice, maxPrice, sort, page);
 		model.addAttribute("sans", list);
 		model.addAttribute("currentPage", page);
-		return "/nhanvien/quanlysan";
+		return "nhanvien/quanlysan";
 	}
 	
 	@GetMapping("/badmintonManager/{id}")
@@ -88,7 +99,7 @@ public class BadmintonCourtController {
 		
 		model.addAttribute("sanChiTiet", new BadmintonCourt());
 		if (page < 1)
-            return "redirect:/badmintonManager/" + id.get() + urlString;
+            return "redirect:/employee/badmintonManager/" + id.get() + urlString;
 		
 		Optional<BadmintonCourt> found = courtRepo.findById(id.orElse(-1));
 		BadmintonCourt court = new BadmintonCourt();
@@ -101,7 +112,7 @@ public class BadmintonCourtController {
 		model.addAttribute("sanChiTiet", court);
 		model.addAttribute("sans", list);
 		model.addAttribute("currentPage", page);
-		return "/nhanvien/quanlysan";
+		return "nhanvien/quanlysan";
 	}
 	
 	@PostMapping("/badmintonUpdate")
@@ -110,7 +121,7 @@ public class BadmintonCourtController {
 		Optional<BadmintonCourt> found = courtRepo.findById(court.getId());
 		if(found.isPresent())
 			courtRepo.save(court);
-		return "redirect:/badmintonManager";
+		return "redirect:/employee/badmintonManager";
 	}
 	
 	@GetMapping("/badmintonRemove/{id}")
@@ -126,26 +137,39 @@ public class BadmintonCourtController {
 		} else {
 			model.addAttribute("message", "Xóa sân thất bại");
 		}
-		return "redirect:/badmintonManager";
+		return "redirect:/employee/badmintonManager";
 	}
 	
 	@GetMapping("/badmintonAdd")
 	public String addBadminton(Model model) {
-		BadmintonCourt court = new BadmintonCourt();
+		BadmintonCourtDTO court = new BadmintonCourtDTO();
 		model.addAttribute("court", court);
-		
-		return "/nhanvien/themsan";
+		return "nhanvien/themsan";
 	}
 	
 	@PostMapping("/badmintonAdd")
-	public String saveBadminton(Model model, @Validated @ModelAttribute("court") BadmintonCourt court, BindingResult result) {
+	public String saveBadminton(Model model, @Validated @ModelAttribute("court") BadmintonCourtDTO courtDTO, BindingResult result) {
+		if (courtDTO.getImages().isEmpty())
+			result.addError(new FieldError("productDTO", "image", "Hình ảnh phải có"));
+		
 		if(result.hasErrors()) {
-			return "/nhanvien/themsan";
+			return "nhanvien/themsan";
 		}
 		
+		BadmintonCourt court = new BadmintonCourt(courtDTO.getId(), courtDTO.getName(), courtDTO.getType(), courtDTO.getPrice(), courtDTO.getDescription(), courtDTO.getAddress(), courtDTO.isAvailability());
+		
+		List<BadmintonCourtPic> pics = new ArrayList<>();
+		for(MultipartFile image : courtDTO.getImages()) {
+			if(!image.isEmpty()) {
+				String url = uploadService.uploadMultipartFileToCloudinary(image);
+				pics.add(new BadmintonCourtPic(url, court));
+			}
+		}
+		
+		court.setBadmintonCourtPics(pics);
 		courtRepo.save(court);
 		
-		return "redirect:/badmintonManager";
+		return "redirect:/employee/badmintonManager";
 	}
 	
 	@ModelAttribute("loaiSan")

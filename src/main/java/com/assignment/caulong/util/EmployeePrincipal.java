@@ -7,35 +7,33 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.assignment.caulong.models.Customer;
+import com.assignment.caulong.models.Employee;
 
-public class UserPrincipal implements UserDetails {
+public class EmployeePrincipal implements UserDetails {
+	private Employee employee;
 
-	private Customer customer;
-	
-
-	public UserPrincipal(Customer customer) {
+	public EmployeePrincipal(Employee employee) {
 		super();
-		this.customer = customer;
+		this.employee=employee;
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> permisson=new ArrayList<>();
-		permisson.add(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
+		permisson.add(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
 		return permisson;
 	}
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
-		return customer.getPassword();
+		return employee.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return customer.getUsername();
+		return employee.getUsername();
 	}
 
 }

@@ -1,7 +1,5 @@
 package com.assignment.caulong.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +16,9 @@ import com.assignment.caulong.service.CustomerService;
 import com.assignment.caulong.service.EmployeeService;
 import com.assignment.caulong.service.LoginService;
 
-
 @Controller
 public class LoginController {
+	
 	private LoginService loginService;
 	private CustomerService cusService;
 	private EmployeeService empService;
@@ -28,25 +26,22 @@ public class LoginController {
 	@Autowired
 	BadmintonCourtRepository badmintonRepo;
 	
-	@Autowired
 	public LoginController(LoginService loginService,CustomerService cusService,EmployeeService empService) {
 		super();
 		this.loginService = loginService;
 		this.cusService= cusService;
 		this.empService=empService;
 	}
-
 	
+//	@GetMapping("customer/login")
+//	public String getLogin(Model model)
+//	{
+//		User user=new User();
+//		model.addAttribute("user", user);
+//		return "DangNhap";
+//	}
 	
-	@GetMapping("/login")
-	public String getLogin(Model model)
-	{
-		User user=new User();
-		model.addAttribute("user", user);
-		return "DangNhap";
-	}
-	
-	@GetMapping("/signup")
+	@GetMapping("customer/signup")
 	public String getSignUp(Model model)
 	{
 		Customer cus=new Customer();
@@ -62,21 +57,23 @@ public class LoginController {
 		model.addAttribute("san",sanCau);
 		return "ChiTietSan";
 	}
+	
 	@PostMapping("/login") 
 	public String GetLogin(Model model,@ModelAttribute() User user) 
 	{
-		
-		if(loginService.CheckLogin(user.getUsername(), user.getPassword()))
-		{
-			return "redirect:/";
-		}
-		else
-		{
-			model.addAttribute("Message", "Login failed, there is an error during the login process");
-			return "redirect:/login";
-		}
+		return "redirect:/";
+//		if(loginService.CheckLogin(user.getUsername(), user.getPassword()))
+//		{
+//			return "redirect:/";
+//		}
+//		else
+//		{
+//			model.addAttribute("Message", "Login failed, there is an error during the login process");
+//			return "redirect:/login";
+//		}
 		
 	}
+	
 	@PostMapping("/signup")
 	public String GetSignUp(@ModelAttribute Customer customer,Model model)
 	{
@@ -93,7 +90,7 @@ public class LoginController {
 		}
 	}
 	
-	@GetMapping("/loginEmployee")
+	@GetMapping("/employee/loginEmployee")
 	public String GetLoginEmployee(Model model)
 	{
 		User user=new User();
@@ -102,23 +99,22 @@ public class LoginController {
 	
 	}
 	
-	@PostMapping("/loginEmployee")
+	@PostMapping("/employee/loginEmployee")
 	public String Checklogin(Model model,@ModelAttribute() User user)
 	{
-		System.out.println(user.getUsername());
-		System.out.println(user.getPassword());
-		if(loginService.CheckLoginEm(user.getUsername(), user.getPassword()))
-		{
-			System.out.println("Login Pass");
-			return "redirect:/"; 
-			
-		}
-		else
-		{
-			System.out.println("Login Fail");
-			model.addAttribute("Message", "Login failed, there is an error during the login process");
-			return "redirect:/loginEmployee";
-		}
+		return "redirect:/";
+//		if(loginService.CheckLoginEm(user.getUsername(), user.getPassword()))
+//		{
+//			System.out.println("Login Pass");
+//			return "redirect:/"; 
+//			
+//		}
+//		else
+//		{
+//			System.out.println("Login Fail");
+//			model.addAttribute("Message", "Login failed, there is an error during the login process");
+//			return "redirect:/loginEmployee";
+//		}
 		
 	}
 	
